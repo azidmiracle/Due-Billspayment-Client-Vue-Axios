@@ -1,9 +1,9 @@
 <template>
   <div class="ion-page">
     <ion-content class="ion-padding">
-      <DueList :billsList="billsList" v-on:deleteList="onDeleteList"/>
+      <DueList :billsList="billsList" v-on:deleteList="onDeleteList" />
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" @click="openAddListModal">
-        <ion-fab-button>
+        <ion-fab-button color="secondary">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      billsList: null,
+      billsList: null
     };
   },
   methods: {
@@ -33,7 +33,6 @@ export default {
       this.billsList = await Due.getAllDueLists("azid_miracle");
     },
     async openAddListModal() {
-
       let modal = await this.$ionic.modalController.create({
         component: addListModal,
         componentProps: {
@@ -47,13 +46,16 @@ export default {
       await modal.present();
 
       // update the lists
-      await modal.onDidDismiss().then(()=>this.getAlldues());
-
-      
+      await modal.onDidDismiss().then(() => this.getAlldues());
     },
-      // Triggered when `childToParent` event is emitted by the child.
-    onDeleteList (value) {
-      this.billsList = value
+    // Triggered when `childToParent` event is emitted by the child.
+    onDeleteList(value) {
+      let isDeleted = confirm("Do you want to delete?");
+      if (isDeleted) {
+        Due.deleteDue(value);
+      }
+      this.getAlldues(); //emit to the parent);
+      console.log(value);
     }
   },
   mounted() {

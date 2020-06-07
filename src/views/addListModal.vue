@@ -1,8 +1,9 @@
 <template>
   <div class="ion-page">
-    <ion-header translucent>
-      <ion-toolbar>
-        <ion-title>Add New Bills Payment</ion-title>
+   
+    <ion-header  >
+      <ion-toolbar color="dark">
+        <ion-title slot="start">Add Bills</ion-title>
         <ion-buttons slot="end">
           <ion-button v-on:click="dismissModal()">Close</ion-button>
         </ion-buttons>
@@ -40,11 +41,11 @@
         </ion-item>
 
         <ion-item>
-          <ion-label position="stacked">Day of the month for its due date e.g. 20</ion-label>
+          <ion-label position="stacked">Scheduled Day e.g. 20</ion-label>
           <ion-input
             type="number"
-            :value="month_day"
-            @input="month_day = $event.target.value"
+            :value="scheduled_day"
+            @input="scheduled_day = $event.target.value"
             clear-input="true"
             required
           ></ion-input>
@@ -60,14 +61,15 @@
           ></ion-input>
         </ion-item>
         <ion-button
-          :disabled="bills_name==null || benefeciary_name==null || description==null || month_day==null || amount==null"
+          :disabled="bills_name==null || benefeciary_name==null || description==null || scheduled_day==null || amount==null"
           type="submit"
           fill="solid"
           expand="block"
-          color="dark"
+          color="danger"
         >Add</ion-button>
       </form>
     </ion-content>
+   
   </div>
 </template>
 
@@ -87,7 +89,7 @@ export default {
       bills_name: null,
       benefeciary_name: null,
       description: null,
-      month_day: null,
+      scheduled_day: null,
       amount: null
     };
   },
@@ -104,7 +106,7 @@ export default {
           this.bills_name,
           this.benefeciary_name,
           this.description,
-          this.month_day,
+          this.scheduled_day,
           this.amount
         );
         Due.insertDue(this.newBill);
@@ -120,3 +122,7 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+</style>

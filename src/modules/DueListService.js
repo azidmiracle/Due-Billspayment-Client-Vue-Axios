@@ -10,7 +10,7 @@ class Due {
     bills_name,
     benefeciary_name,
     description,
-    month_day,
+    scheduled_day,
     amount
   ) {
     this.id = id;
@@ -18,7 +18,7 @@ class Due {
     this.bills_name = bills_name;
     this.benefeciary_name = benefeciary_name;
     this.description = description;
-    this.month_day = month_day;
+    this.scheduled_day = scheduled_day;
     this.amount = amount;
     
   }
@@ -45,7 +45,7 @@ class Due {
       bills_name: Dues["bills_name"],
       benefeciary_name: Dues["benefeciary_name"],
       description: Dues["description"],
-      month_day: Dues["month_day"],
+      scheduled_day: Dues["scheduled_day"],
       amount: Dues["amount"],
     }).then(() =>{
       //return response.data.message;

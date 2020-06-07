@@ -1,0 +1,77 @@
+{
+  "users": [
+    {
+      "id": 35,
+      "username": "azid_miracle",
+      "password": "1212121",
+      "mobileNumber": "453434",
+      "country": "Philippines"
+    }
+  ],
+  "countries": [
+    {
+      "id": 1,
+      "countryName": "Philippines"
+    },
+    {
+      "id": 2,
+      "countryName": "Singapore"
+    }
+  ],
+  "dueLists": [
+    {
+      "id": 1,
+      "username": "azid_miracle",
+      "bills_name": "SSS",
+      "benefeciary_name": "SSS",
+      "description": "SSS",
+      "month_day": "12",
+      "amount": "12"
+    },
+    {
+      "id": 2,
+      "username": "azid_miracle",
+      "bills_name": "awaswa",
+      "benefeciary_name": "asas",
+      "description": "asas",
+      "month_day": "12",
+      "amount": "12"
+    },
+    {
+      "id": 4,
+      "username": "azid_miracle",
+      "bills_name": "dfdfd",
+      "benefeciary_name": "dfdfd",
+      "description": "fdfd",
+      "month_day": "12",
+      "amount": "12"
+    },
+    {
+      "id": 5,
+      "username": "azid_miracle",
+      "bills_name": "sasa",
+      "benefeciary_name": "asas",
+      "description": "asa",
+      "month_day": "12",
+      "amount": "12"
+    },
+    {
+      "id": 3,
+      "username": "azid_miracle",
+      "bills_name": "SDSD",
+      "benefeciary_name": "SDS",
+      "description": "SDS",
+      "month_day": "121",
+      "amount": "12121"
+    }
+  ],
+  "transaction": [
+    {
+      "id": 1,
+      "due_id": 1,
+      "date_paid": "May 15, 2020",
+      "paid_by": "Emely",
+      "mode_payment": "AXS"
+    }
+  ]
+}

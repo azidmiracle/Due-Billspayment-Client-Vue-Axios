@@ -20,31 +20,67 @@
   ],
   "dueLists": [
     {
-      "id": 1,
+      "id": 4,
       "username": "azid_miracle",
       "bills_name": "SSS",
-      "benefeciary_name": "SSS",
-      "description": "SSS",
+      "benefeciary_name": "EMELY DIAZ",
+      "description": "sds",
       "scheduled_day": "12",
       "amount": "12"
     },
     {
       "id": 6,
       "username": "azid_miracle",
-      "bills_name": "sdasa",
-      "benefeciary_name": "asa",
-      "description": "asa",
-      "scheduled_day": "12",
-      "amount": "121"
+      "bills_name": "SUNLIFE",
+      "benefeciary_name": "CHARITA QUILICOL",
+      "description": "INSURANCE",
+      "scheduled_day": "15",
+      "amount": "1500"
     }
   ],
   "transaction": [
     {
       "id": 1,
-      "due_id": 1,
+      "bill_id": 1,
       "date_paid": "May 15, 2020",
       "paid_by": "Emely",
-      "mode_payment": "AXS"
+      "mode_payment": "AXS",
+      "amount": "1500"
+    },
+    {
+      "id": 2,
+      "date_paid": "2020-06-07T11:32:34.278Z",
+      "paid_by": 12,
+      "mode_payment": "EMELY"
+    },
+    {
+      "id": 3,
+      "due_id": 4,
+      "date_paid": "2020-06-07T11:34:18.409Z",
+      "paid_by": 12,
+      "mode_payment": "EMELY"
+    },
+    {
+      "id": 4,
+      "due_id": 4,
+      "date_paid": "2020-06-07T11:35:30.141Z",
+      "paid_by": 12,
+      "mode_payment": "AF"
+    },
+    {
+      "id": 5,
+      "due_id": 4,
+      "date_paid": "2020-06-07T11:36:37.907Z",
+      "paid_by": "12",
+      "mode_payment": "QWQWQ"
+    },
+    {
+      "id": 6,
+      "due_id": 4,
+      "date_paid": "2020-06-07T11:38:25.306Z",
+      "amount": "12",
+      "paid_by": "ASASA",
+      "mode_payment": "ASASA"
     }
   ]
 }

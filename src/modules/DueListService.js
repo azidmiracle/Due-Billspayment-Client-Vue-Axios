@@ -37,8 +37,7 @@ class Due {
   }
 
   //create Due
-  static insertDue(Dues) {
-    
+  static insertDue(Dues) {  
     return axios.post(DueURL, {
       id: Dues["id"],
       username: Dues["username"],
@@ -54,6 +53,17 @@ class Due {
       alert(err);
     })
   }
+
+  //create Due
+  static updateDue(id,data) {  
+    return axios.patch(`${DueURL}${id}`, data).then(() =>{
+      //return response.data.message;
+      alert("Update Successfully");
+    }).catch(err =>{
+      alert(err);
+    })
+  }
+
   //delete Due
   static deleteDue(id) {
     return axios.delete(`${DueURL}${id}`);

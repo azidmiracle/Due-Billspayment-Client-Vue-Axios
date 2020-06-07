@@ -7,7 +7,7 @@
       color="dark"
     >
       <ion-toolbar color="medium">
-        <ion-title slot="start">{{ due.bills_name.toUpperCase() }}</ion-title>
+        <ion-title slot="start" class="ion-text-uppercase">{{ due.bills_name}}</ion-title>
         <ion-button slot="end" :value="due.id" v-on:click="deleteDue(due.id)" color="danger">
           <ion-icon name="close"></ion-icon>
         </ion-button>
@@ -22,12 +22,17 @@
         <br />
         <ion-label>
           Due Date:
-          {{ todayMonth + " " + due.month_day + ", " + todayYear }}
+          {{ getNextPaymentDate(due) }}
         </ion-label>
         <br />
-        <ion-item >
+        <ion-item>
           <ion-label>See Details</ion-label>
-          <ion-button slot="end" color="secondary">
+          <ion-button
+            slot="end"
+            color="secondary"
+            :value=" due.bills_name"
+            @click="seeDetails(due.bills_name,due)"
+          >
             <ion-icon name="arrow-forward"></ion-icon>
           </ion-button>
         </ion-item>
@@ -50,13 +55,26 @@ export default {
       todayMonth: "",
       todayYear: null,
       billChild: this.billsList, //initially, the billList array from parent is pass to this variable,
-      key: null
+      key: null,
+      nextPaymentDue: null
     };
   },
   methods: {
     deleteDue(key) {
       this.key = key;
       this.$emit("deleteList", this.key);
+    },
+    seeDetails(e, due) {
+      this.$router.push({
+        name: "due-name",
+        path: `${e}`,
+        params: { duename: `${e}`, duenameDetails: due }
+      });
+    }
+  },
+  computed: {
+    getNextPaymentDate: function () {
+      return due=> this.todayMonth + " " + due.scheduled_day + ", " + this.todayYear;
     }
   },
   created() {
@@ -67,8 +85,6 @@ export default {
 </script>
 
 <style>
-
-.lists{
-  
+.lists {
 }
 </style>

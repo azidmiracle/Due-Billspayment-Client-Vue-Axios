@@ -1,9 +1,9 @@
 <template>
   <div class="ion-page">
-   
+ 
     <ion-header  >
       <ion-toolbar color="dark">
-        <ion-title slot="start">Add Bills</ion-title>
+        <ion-title slot="start">Enroll Bill</ion-title>
         <ion-buttons slot="end">
           <ion-button v-on:click="dismissModal()">Close</ion-button>
         </ion-buttons>
@@ -96,7 +96,7 @@ export default {
   methods: {
     addDueList(e) {
    e.preventDefault();
-      let isConfirmed = confirm("Do you want to add the bills payment?");
+      let isConfirmed = confirm("Do you want to enroll this bill?");
 
       if (isConfirmed) {
         //create new instance of user

@@ -13,6 +13,7 @@ class User {
   }
 
   static getAllUserLists() {
+
     return new Promise((resolve, reject) => {
       try {
         axios.get(userURL).then((res) => {
@@ -23,6 +24,7 @@ class User {
         reject(err);
       }
     });
+    
   }
 
   //create user
@@ -40,16 +42,9 @@ class User {
   static deleteUser(id) {
     return axios.delete(`${userURL}${id}`);
   }
+
+
 }
 
-//check if the user exists in the user collection
-function checkExistingUser(userCollection, accountNumber) {
-  let accontuNumberArr = userCollection.map((element) => element.accountNumber);
-  let isFound = false;
-  if (accontuNumberArr.indexOf(accountNumber) >= 0) {
-    isFound = true;
-  }
-  return isFound;
-}
 
-export { User, checkExistingUser };
+export { User };

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let txnURL = "http://localhost:3000/transaction/";
-
+let DueURL = "http://localhost:3000/dueLists/";
 //new instance of a Due
 class Transaction {
   constructor(id, due_id, date_paid, amount,paid_by, mode_payment) {
@@ -47,13 +47,14 @@ class Transaction {
     return axios.delete(`${txnURL}${id}`);
   }
 
-  //get the transaction last paid
-  static getLastPaid() {
-    //get all the transaction with the id
-    const history = Transaction.getAllTransactions(); //.filter(element=>element.due_id==due_id);
-
-    return history;
+  //insert the transaction last paid
+  static insertLastPaidToDue(id,last_paid) {
+    return axios.patch(`${DueURL}${id}`, {
+      last_payment: last_paid,
+    })
   }
+
+
 }
 
 export { Transaction };

@@ -28,6 +28,7 @@
         <ion-item>
           <ion-label>See Details</ion-label>
           <ion-button
+            
             slot="end"
             color="secondary"
             :value=" due.bills_name"
@@ -47,7 +48,8 @@ export default {
   name: "DueList",
   props: {
     msg: String,
-    billsList: Array
+    billsList: Array,
+    username:String
   },
   data() {
     return {
@@ -62,13 +64,13 @@ export default {
   methods: {
     deleteDue(key) {
       this.key = key;
-      this.$emit("deleteList", this.key);
+      this.$emit("deleteList", this.key);//emit the key to the Home.vue parent
     },
     seeDetails(e, due) {
       this.$router.push({
         name: "due-name",
         path: `${e}`,
-        params: { duename: `${e}`, duenameDetails: due }
+        params: { duename: `${e}`, duenameDetails: due , username: this.username}
       });
     }
   },
@@ -80,6 +82,7 @@ export default {
   created() {
     this.todayMonth = MyDate.getTodayMonth();
     this.todayYear = MyDate.getTodayYear();
+
   }
 };
 </script>

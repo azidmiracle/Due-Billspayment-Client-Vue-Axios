@@ -7,6 +7,10 @@ Vue.use(IonicVueRouter);
 
 const routes = [
   {
+    path:"/signIn",
+    component: () => import("@/views/LogIn.vue"),
+  },
+  {
     path: "/tabs",
     component: () => import("@/components/TabRoot.vue"),
     children: [
@@ -26,8 +30,9 @@ const routes = [
       },
     ],
   },
+
   {
-    path:"/",redirect:"tabs/home"
+    path:"/",redirect:"/signIn"
   }
 ];
 

@@ -102,7 +102,7 @@ export default {
     return {
       duename: null,
       id: null,
-      //item: {},
+      username:null,
       duenameDetails: {},
       bills_name: null,
       benefeciary_name: null,
@@ -153,6 +153,7 @@ export default {
             bills_name: this.bills_name,
             _amount:this.amount,
             due_id:this.id,
+            username:this.username
             
           }
         }
@@ -167,6 +168,7 @@ export default {
   },
 
   beforeMount: function() {
+    this.username = this.$route.params.username;
     this.duename = this.$route.params.duename;
     this.duenameDetails = this.$route.params.duenameDetails;
     this.id = this.duenameDetails.id;

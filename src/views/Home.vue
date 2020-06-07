@@ -1,7 +1,7 @@
 <template>
   <div class="ion-page">
     <ion-content class="ion-padding">
-      <DueList :billsList="billsList" v-on:deleteList="onDeleteList" />
+      <DueList :billsList="billsList" v-on:deleteList="onDeleteList" :username="username"/>
 
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" @click="openAddListModal">
         
@@ -26,19 +26,28 @@ export default {
   },
   data() {
     return {
-      billsList: null
+      billsList: null,
+      username:null,
     };
-  },
+  }
+  ,
+  created() {
+    this.getAlldues();
+    this.username=this.$route.params.username;
+    
+  }
+  ,
   methods: {
     async getAlldues() {
-      this.billsList = await Due.getAllDueLists("azid_miracle");
+      this.billsList = await Due.getAllDueLists(this.$route.params.username);
     },
     async openAddListModal() {
       let modal = await this.$ionic.modalController.create({
         component: addListModal,
         componentProps: {
           propsData: {
-            timeStamp: new Date()
+            timeStamp: new Date(),
+            username:this.username
           }
         }
       });
@@ -59,9 +68,6 @@ export default {
       this.getAlldues(); //emit to the parent);
       console.log(value);
     }
-  },
-  mounted() {
-    this.getAlldues();
   }
 };
 </script>

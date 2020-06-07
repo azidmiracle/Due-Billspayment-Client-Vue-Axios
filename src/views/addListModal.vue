@@ -78,14 +78,14 @@ import { Due } from "@/modules/DueListService.js";
 export default {
   name: "addListModal",
   props: {
-    title: { type: String, default: "Super Modal" }
+    title: { type: String, default: "Super Modal" },
+    username:String
   },
   data() {
     return {
       content: "Content",
       newBill: {},
       lastId: 0,
-      username: "",
       bills_name: null,
       benefeciary_name: null,
       description: null,
@@ -101,7 +101,7 @@ export default {
       if (isConfirmed) {
         //create new instance of user
         this.newBill = new Due(
-          6,
+          9,
           this.username,
           this.bills_name,
           this.benefeciary_name,
@@ -118,7 +118,7 @@ export default {
     }
   },
   mounted() {
-    this.username = "azid_miracle";//--NOTE: THIS WILL BE CHANGED LATER
+
   }
 };
 </script>

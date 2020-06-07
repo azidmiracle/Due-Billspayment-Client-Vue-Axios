@@ -16,9 +16,11 @@
 
         <ion-item>
           <ion-icon name="calendar"></ion-icon>
-          <ion-datetime  display-timezone="utc"   
-           :value="date_paid"
-            @ionChange="date_paid = $event.target.value"></ion-datetime>
+          <ion-datetime
+            display-timezone="utc"
+            :value="date_paid"
+            @ionChange="date_paid = $event.target.value"
+          ></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Amount paid in pesos e.g. 1500</ion-label>
@@ -40,7 +42,7 @@
             required
           ></ion-input>
         </ion-item>
-         <ion-item>
+        <ion-item>
           <ion-label position="stacked">Mode of Payment</ion-label>
           <ion-input
             type="text"
@@ -51,7 +53,7 @@
           ></ion-input>
         </ion-item>
         <ion-button
-          :disabled="amount==null"
+          :disabled="amount==null || paid_by==null || mode_payment==null"
           type="submit"
           fill="solid"
           expand="block"
@@ -68,39 +70,39 @@ export default {
   name: "addTransaction",
   props: {
     bills_name: String,
-    _amount:String,
-    due_id:Number,
+    _amount: String,
+    due_id: Number,
+    username:String
   },
   data() {
     return {
       newTxn: {},
       lastId: 0,
-      date_paid:new Date(),
+      date_paid: new Date(),
       paid_by: null,
-      mode_payment:null,
-      amount: this._amount,
-
+      mode_payment: null,
+      amount: this._amount
     };
   },
   methods: {
     addTxn(e) {
       e.preventDefault();
-      let isConfirmed = confirm("Do you want to enroll this bill?");
+      let isConfirmed = confirm("Do you want to add this transaction?");
 
       if (isConfirmed) {
         //create new instance of user
         this.newTxn = new Transaction(
-          6,
+          8,
           this.due_id,
           this.date_paid,
           this.amount,
           this.paid_by,
-          this.mode_payment,
-
-
-         
+          this.mode_payment
         );
-        Transaction.insertTransaction(this.newTxn);
+        Transaction.insertTransaction(this.newTxn); //
+
+        //UPDATE THE DUE LIST TO INSERT LAST TRANSACTION//
+        Transaction.insertLastPaidToDue(this.due_id, this.date_paid); //
       }
     },
     //when the close button is close, it will dismiss the modal and pass the value of the new bill
@@ -109,7 +111,7 @@ export default {
     }
   },
   mounted() {
-    this.username = "azid_miracle"; //--NOTE: THIS WILL BE CHANGED LATER
+    
   }
 };
 </script>

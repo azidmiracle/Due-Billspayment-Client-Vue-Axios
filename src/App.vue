@@ -1,14 +1,18 @@
 <template>
   <div id="app">
-    <div id="nav">    
-         <ion-vue-router main></ion-vue-router>      
+    <div >    
+        <ion-vue-router main></ion-vue-router>   
     </div>
-    <router-view />
   </div>
 </template>
 <script>
-
+//import LogIn from "@/views/LogIn.vue";
 export default {
-   name:"app"
+   name:"app",
+  components: {
+   // LogIn
+  },
 }
+
+//<ion-vue-router main></ion-vue-router>    
 </script>

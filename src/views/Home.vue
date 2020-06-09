@@ -2,9 +2,7 @@
   <div class="ion-page">
     <ion-content class="ion-padding">
       <DueList :billsList="billsList" v-on:deleteList="onDeleteList" :username="username"/>
-
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed" @click="openAddListModal">
-        
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed" @click="openAddListModal"> 
         <ion-fab-button color="secondary">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
@@ -18,11 +16,11 @@ import { Due } from "@/modules/DueListService.js";
 import addListModal from "./addListModal.vue";
 // @ is an alias to /src
 import DueList from "@/components/DueList.vue";
-
 export default {
   name: "Home",
   components: {
-    DueList
+    DueList,
+   // IonTabs
   },
   data() {
     return {
@@ -31,7 +29,7 @@ export default {
     };
   }
   ,
-  created() {
+  mounted() {
     this.getAlldues();
     this.username=this.$route.params.username;
     

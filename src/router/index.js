@@ -1,9 +1,12 @@
 import Vue from "vue";
 //import VueRouter from 'vue-router'
 import { IonicVueRouter } from "@ionic/vue";
-
+//import TabRoot from "@/components/TabRoot.vue";
+//import Home from "@/views/Home.vue";
+//import Due from "@/components/Due.vue";
 
 Vue.use(IonicVueRouter);
+//Vue.use(VueRouter);
 
 const routes = [
   {
@@ -11,11 +14,11 @@ const routes = [
     component: () => import("@/views/LogIn.vue"),
   },
   {
-    path: "/tabs",
+    path: "/:username",
     component: () => import("@/components/TabRoot.vue"),
     children: [
       {
-        path: "home",
+        path: "home/",
         name: "home",
         components: {
           homeRoute: () => import("@/views/Home.vue"),
@@ -37,6 +40,7 @@ const routes = [
 ];
 
 const router = new IonicVueRouter({
+  //const router = new VueRouter({
   mode: "history",
   base: "/",
   routes,

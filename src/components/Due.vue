@@ -1,5 +1,5 @@
 <template>
-  <div class="ion-page" name="ionDivItem">
+  <div class="ion-page">
     <ion-header>
       <ion-toolbar>
         <ion-back-button default-href="tabs/home/" slot="start"></ion-back-button>
@@ -93,7 +93,6 @@
 </template>
 
 <script>
-import removeInvisible from "./removeInvisible";
 import { Due } from "@/modules/DueListService.js";
 import addTransaction from "../views/addTransaction.vue";
 export default {
@@ -113,12 +112,6 @@ export default {
     };
   },
   methods: {
-    removeClass() {
-      //remove the class of the input to make it visible
-      let inputTag = document.getElementsByName("ionDivItem")[1];
-      console.log(inputTag);
-      removeInvisible(inputTag);
-    },
     editDues() {
       this.isEdit = true;
       //make all textboxes editable
@@ -166,8 +159,7 @@ export default {
       await modal.onDidDismiss().then(() => this.getAlldues());
     }
   },
-
-  beforeMount: function() {
+  mounted: function() {
     this.username = this.$route.params.username;
     this.duename = this.$route.params.duename;
     this.duenameDetails = this.$route.params.duenameDetails;
@@ -177,9 +169,7 @@ export default {
     this.description = this.duenameDetails.description;
     this.scheduled_day = this.duenameDetails.scheduled_day;
     this.amount = this.duenameDetails.amount;
-  },
-  mounted: function() {
-    this.removeClass();
+   
   }
 };
 </script>

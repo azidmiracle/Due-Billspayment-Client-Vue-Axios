@@ -67,7 +67,7 @@ export default {
           //this.$router.push("/tabs/home");
 
            this.$router.push({
-           name: "home",
+         name: "home",
            params: { username: this.username }
       });
         }else{

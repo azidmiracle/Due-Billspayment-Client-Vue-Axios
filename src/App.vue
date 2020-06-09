@@ -6,13 +6,10 @@
   </div>
 </template>
 <script>
-//import LogIn from "@/views/LogIn.vue";
-export default {
-   name:"app",
-  components: {
-   // LogIn
-  },
-}
 
-//<ion-vue-router main></ion-vue-router>    
+export default {
+   name:"app"
+  
+}
+  
 </script>

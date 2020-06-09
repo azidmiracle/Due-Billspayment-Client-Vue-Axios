@@ -66,11 +66,10 @@ export default {
       this.key = key;
       this.$emit("deleteList", this.key);//emit the key to the Home.vue parent
     },
-    seeDetails(e, due) {
+    seeDetails(bills_name, due) {
       this.$router.push({
         name: "due-name",
-        path: `${e}`,
-        params: { duename: `${e}`, duenameDetails: due , username: this.username}
+        params: { duename: `${bills_name}`, duenameDetails: due , username: this.username}
       });
     }
   },

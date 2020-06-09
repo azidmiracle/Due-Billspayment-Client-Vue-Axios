@@ -31,10 +31,10 @@
       "username": "azid_miracle",
       "bills_name": "SSS",
       "benefeciary_name": "EMELY DIAZ",
-      "description": "ASSDSDS",
+      "description": "EDIT TO",
       "scheduled_day": "12",
       "amount": "12",
-      "last_payment": "2020-06-07T11:54:48.682Z"
+      "last_payment": "2020-06-08T01:22:57.386Z"
     },
     {
       "id": 5,
@@ -47,14 +47,23 @@
       "last_payment": "2020-06-07T13:26:58.724Z"
     },
     {
-      "id": 6,
+      "id": 2,
       "username": "azid_miracle",
       "bills_name": "CONDO VISTALAND",
       "benefeciary_name": "EMELY LORIA",
       "description": "03-21F",
       "scheduled_day": "10",
       "amount": "23000",
-      "last_payment": "2020-06-07T15:20:14.054Z"
+      "last_payment": "2020-06-09T15:21:23.928Z"
+    },
+    {
+      "id": 9,
+      "username": "azid_miracle",
+      "bills_name": "PADALA NANAY",
+      "benefeciary_name": "NANAY",
+      "description": "PADALA",
+      "scheduled_day": "1",
+      "amount": "15000"
     }
   ],
   "transaction": [
@@ -112,10 +121,10 @@
     {
       "id": 8,
       "due_id": 6,
-      "date_paid": "2020-06-07T15:20:14.054Z",
+      "date_paid": "2020-06-09T15:21:23.928Z",
       "amount": "23000",
-      "paid_by": "MEEMEM",
-      "mode_payment": "UOB"
+      "paid_by": "AUGUST",
+      "mode_payment": "BPI"
     }
   ]
 }

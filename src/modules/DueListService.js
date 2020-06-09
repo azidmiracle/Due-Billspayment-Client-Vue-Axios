@@ -11,7 +11,8 @@ class Due {
     benefeciary_name,
     description,
     scheduled_day,
-    amount
+    amount,
+    currency
   ) {
     this.id = id;
     this.username=username;
@@ -20,7 +21,7 @@ class Due {
     this.description = description;
     this.scheduled_day = scheduled_day;
     this.amount = amount;
-    
+    this.currency = currency;
   }
 
   static getAllDueLists(_username) {
@@ -46,6 +47,7 @@ class Due {
       description: Dues["description"],
       scheduled_day: Dues["scheduled_day"],
       amount: Dues["amount"],
+      currency: Dues["currency"],
     }).then(() =>{
       //return response.data.message;
       alert("Insert Successfully");

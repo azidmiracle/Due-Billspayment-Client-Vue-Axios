@@ -1,7 +1,6 @@
 <template>
   <div class="ion-page">
- 
-    <ion-header  >
+    <ion-header>
       <ion-toolbar color="dark">
         <ion-title slot="start">Enroll Bill</ion-title>
         <ion-buttons slot="end">
@@ -60,6 +59,16 @@
             required
           ></ion-input>
         </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Currency</ion-label>
+            <ion-select  :value="currency"
+            @ionBlur="currency = $event.target.value" ok-text="Okay" cancel-text="Dismiss">
+              <ion-select-option value="sgd">Singapore Dollar</ion-select-option>
+              <ion-select-option value="php">Philippine Peso</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
         <ion-button
           :disabled="bills_name==null || benefeciary_name==null || description==null || scheduled_day==null || amount==null"
           type="submit"
@@ -69,7 +78,6 @@
         >Add</ion-button>
       </form>
     </ion-content>
-   
   </div>
 </template>
 
@@ -79,7 +87,7 @@ export default {
   name: "addListModal",
   props: {
     title: { type: String, default: "Super Modal" },
-    username:String
+    username: String
   },
   data() {
     return {
@@ -90,12 +98,13 @@ export default {
       benefeciary_name: null,
       description: null,
       scheduled_day: null,
-      amount: null
+      amount: null,
+      currency:null,
     };
   },
   methods: {
     addDueList(e) {
-   e.preventDefault();
+      e.preventDefault();
       let isConfirmed = confirm("Do you want to enroll this bill?");
 
       if (isConfirmed) {
@@ -107,7 +116,8 @@ export default {
           this.benefeciary_name,
           this.description,
           this.scheduled_day,
-          this.amount
+          this.amount,
+          this.currency
         );
         Due.insertDue(this.newBill);
       }
@@ -117,12 +127,9 @@ export default {
       this.$ionic.modalController.dismiss(this.newBill);
     }
   },
-  mounted() {
-
-  }
+  mounted() {}
 };
 </script>
 
 <style scoped>
-
 </style>

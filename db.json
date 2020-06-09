@@ -57,13 +57,23 @@
       "last_payment": "2020-06-09T15:21:23.928Z"
     },
     {
-      "id": 9,
+      "id": 7,
       "username": "azid_miracle",
       "bills_name": "PADALA NANAY",
       "benefeciary_name": "NANAY",
       "description": "PADALA",
       "scheduled_day": "1",
       "amount": "15000"
+    },
+    {
+      "id": 9,
+      "username": "azid_miracle",
+      "bills_name": "asas",
+      "benefeciary_name": "asas",
+      "description": "asa",
+      "scheduled_day": "121",
+      "amount": "121",
+      "currency": "php"
     }
   ],
   "transaction": [

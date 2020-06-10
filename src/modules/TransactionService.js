@@ -4,11 +4,12 @@ let txnURL = "http://localhost:3000/transaction/";
 let DueURL = "http://localhost:3000/dueLists/";
 //new instance of a Due
 class Transaction {
-  constructor(id, due_id, date_paid, amount,paid_by, mode_payment) {
+  constructor(id, due_id, date_paid, amount,currency,paid_by, mode_payment) {
     this.id = id;
     this.due_id = due_id;
     this.date_paid = date_paid;
     this.amount = amount;
+    this.currency = currency;
     this.paid_by = paid_by;
     this.mode_payment = mode_payment;
   }
@@ -33,6 +34,7 @@ class Transaction {
       due_id: transaction["due_id"],
       date_paid: transaction["date_paid"],
       amount:transaction["amount"],
+      currency:transaction["currency"],
       paid_by: transaction["paid_by"],
       mode_payment: transaction["mode_payment"],
     }).then(() =>{

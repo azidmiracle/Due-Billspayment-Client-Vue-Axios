@@ -34,7 +34,8 @@
       "description": "EDIT TO",
       "scheduled_day": "12",
       "amount": "12",
-      "last_payment": "2020-06-08T01:22:57.386Z"
+      "currency": "sgd",
+      "last_payment": "2020-06-09T15:47:40.887Z"
     },
     {
       "id": 5,
@@ -55,25 +56,6 @@
       "scheduled_day": "10",
       "amount": "23000",
       "last_payment": "2020-06-09T15:21:23.928Z"
-    },
-    {
-      "id": 7,
-      "username": "azid_miracle",
-      "bills_name": "PADALA NANAY",
-      "benefeciary_name": "NANAY",
-      "description": "PADALA",
-      "scheduled_day": "1",
-      "amount": "15000"
-    },
-    {
-      "id": 9,
-      "username": "azid_miracle",
-      "bills_name": "asas",
-      "benefeciary_name": "asas",
-      "description": "asa",
-      "scheduled_day": "121",
-      "amount": "121",
-      "currency": "php"
     }
   ],
   "transaction": [
@@ -130,11 +112,12 @@
     },
     {
       "id": 8,
-      "due_id": 6,
-      "date_paid": "2020-06-09T15:21:23.928Z",
-      "amount": "23000",
-      "paid_by": "AUGUST",
-      "mode_payment": "BPI"
+      "due_id": 4,
+      "date_paid": "2020-06-09T15:47:40.887Z",
+      "amount": "12",
+      "currency": "sgd",
+      "paid_by": "ems",
+      "mode_payment": "sdsdsds"
     }
   ]
 }

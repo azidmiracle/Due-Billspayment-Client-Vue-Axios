@@ -56,7 +56,7 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">Amount to pay in pesos e.g. 1500</ion-label>
+          <ion-label position="stacked">Amount to pay e.g. 1500</ion-label>
           <ion-input
             type="number"
             :value="amount"
@@ -66,6 +66,16 @@
             required
           ></ion-input>
         </ion-item>
+         <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Currency</ion-label>
+            <ion-select  :value="currency"
+            @ionBlur="currency = $event.target.value" ok-text="Okay" cancel-text="Dismiss">
+              <ion-select-option value="sgd">Singapore Dollar</ion-select-option>
+              <ion-select-option value="php">Philippine Peso</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
         <ion-grid name="grid" v-if="isEdit==true">
           <ion-row class="ion-justify-content-evenly">
             <ion-col class="ion-padding">
@@ -108,6 +118,7 @@ export default {
       description: null,
       scheduled_day: null,
       amount: null,
+       currency: null,
       isEdit: false
     };
   },
@@ -130,7 +141,8 @@ export default {
           benefeciary_name: this.benefeciary_name,
           description: this.description,
           scheduled_day: this.scheduled_day,
-          amount: this.amount
+          amount: this.amount,
+          currency: this.currency
         };
         console.log(newData);
         console.log(this.id);
@@ -145,8 +157,10 @@ export default {
           propsData: {
             bills_name: this.bills_name,
             _amount:this.amount,
+            _currency:this.currency,
             due_id:this.id,
-            username:this.username
+            username:this.username,
+
             
           }
         }
@@ -169,6 +183,7 @@ export default {
     this.description = this.duenameDetails.description;
     this.scheduled_day = this.duenameDetails.scheduled_day;
     this.amount = this.duenameDetails.amount;
+     this.currency = this.duenameDetails.currency;
    
   }
 };

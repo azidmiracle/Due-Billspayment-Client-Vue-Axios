@@ -6,7 +6,7 @@
       v-bind:key="due.id"
       color="dark"
     >
-      <ion-toolbar color="medium">
+      <ion-toolbar color="light">
         <ion-title slot="start" class="ion-text-uppercase">{{ due.bills_name}}</ion-title>
         <ion-button slot="end" :value="due.id" v-on:click="deleteDue(due.id)" color="danger">
           <ion-icon name="close"></ion-icon>

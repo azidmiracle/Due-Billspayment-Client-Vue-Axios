@@ -23,7 +23,7 @@
           ></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">Amount paid in pesos e.g. 1500</ion-label>
+          <ion-label position="stacked">Amount paid e.g. 1500</ion-label>
           <ion-input
             type="number"
             :value="amount"
@@ -32,6 +32,16 @@
             required
           ></ion-input>
         </ion-item>
+         <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Currency</ion-label>
+            <ion-select  :value="currency"
+            @ionBlur="currency = $event.target.value" ok-text="Okay" cancel-text="Dismiss">
+              <ion-select-option value="sgd">Singapore Dollar</ion-select-option>
+              <ion-select-option value="php">Philippine Peso</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
         <ion-item>
           <ion-label position="stacked">Paid by</ion-label>
           <ion-input
@@ -72,6 +82,7 @@ export default {
     bills_name: String,
     _amount: String,
     due_id: Number,
+    _currency: String,
     username:String
   },
   data() {
@@ -81,7 +92,8 @@ export default {
       date_paid: new Date(),
       paid_by: null,
       mode_payment: null,
-      amount: this._amount
+      amount: this._amount,
+      currency: this._currency,
     };
   },
   methods: {
@@ -96,6 +108,7 @@ export default {
           this.due_id,
           this.date_paid,
           this.amount,
+          this.currency,
           this.paid_by,
           this.mode_payment
         );

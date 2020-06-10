@@ -50,7 +50,7 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">Amount to pay in pesos e.g. 1500</ion-label>
+          <ion-label position="stacked">Amount to pay e.g. 1500</ion-label>
           <ion-input
             type="number"
             :value="amount"
@@ -70,7 +70,7 @@
           </ion-item>
         </ion-list>
         <ion-button
-          :disabled="bills_name==null || benefeciary_name==null || description==null || scheduled_day==null || amount==null"
+          :disabled="bills_name==null || benefeciary_name==null || description==null || scheduled_day==null || amount==null || currency==null"
           type="submit"
           fill="solid"
           expand="block"

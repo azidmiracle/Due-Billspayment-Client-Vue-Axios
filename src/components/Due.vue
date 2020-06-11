@@ -126,7 +126,8 @@ export default {
       scheduled_day: null,
       amount: null,
        currency: null,
-      isEdit: false
+      isEdit: false,
+      updatedDue:{}
     };
   },
   methods: {
@@ -138,12 +139,12 @@ export default {
         input_tags[i].readonly = false;
       }
     },
-    onUpdate() {
-      //e.preventDefault();
+    onUpdate(e) {
+      e.preventDefault();
       let isConfirmed = confirm("Do you want to update this bill?");
       if (isConfirmed) {
         //create new instance of user
-        let newData = {
+        this.updatedDue = {
           bills_name: this.bills_name,
           benefeciary_name: this.benefeciary_name,
           description: this.description,
@@ -151,7 +152,7 @@ export default {
           amount: this.amount,
           currency: this.currency
         };
-        Due.updateDue(this.id, newData);
+        Due.updateDue(this.id, this.updatedDue);
       }
     },
 
@@ -177,9 +178,9 @@ export default {
       // update the lists
       //await modal.onDidDismiss().then(() => this.getAlldues());
     },
-    //when the close button is close, it will dismiss the modal and pass the value of the new bill
+    //when the close button is clicked, it will dismiss the modal and pass the value of the new bill
     dismissModal() {
-      this.$ionic.modalController.dismiss();
+      this.$ionic.modalController.dismiss(this.updatedDue);
     }
   },
   mounted: function() {

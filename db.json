@@ -31,7 +31,7 @@
       "username": "azid_miracle",
       "bills_name": "SSS",
       "benefeciary_name": "EMELY DIAZ",
-      "description": "EDIT TO 2nd 2nd",
+      "description": "EDIT",
       "scheduled_day": "12",
       "amount": "12",
       "currency": "sgd",
@@ -51,7 +51,7 @@
       "id": 2,
       "username": "azid_miracle",
       "bills_name": "CONDO VISTALAND",
-      "benefeciary_name": "EMELY LORIA",
+      "benefeciary_name": "EMELY diaz LORIA",
       "description": "03-21F",
       "scheduled_day": "10",
       "amount": "23000",
@@ -102,6 +102,15 @@
       "amount": "12",
       "paid_by": "ASASA",
       "mode_payment": "ASASA"
+    },
+    {
+      "id": 8,
+      "due_id": 9,
+      "date_paid": "2020-06-11T14:37:22.688Z",
+      "amount": "1212121",
+      "currency": "php",
+      "paid_by": "ssds",
+      "mode_payment": "dsdsdsds"
     }
   ]
 }

@@ -66,6 +66,9 @@ export default {
       this.key = key;
       this.$emit("deleteList", this.key);//emit the key to the Home.vue parent
     },
+    updateDetails(){
+      this.$emit("updateList");//emit the key to the Home.vue parent
+    },
     seeDetails(bills_name, due) {
       this.$router.push({
         name: "due-name",
@@ -88,7 +91,7 @@ export default {
       await modal.present();
 
       // update the lists
-      //await modal.onDidDismiss().then(() => this.getAlldues());
+      await modal.onDidDismiss().then(() => this.updateDetails());
     },
   },
   computed: {

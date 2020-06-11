@@ -1,7 +1,7 @@
 <template>
   <div class="ion-page">
     <ion-content class="ion-padding">
-      <DueList :billsList="billsList" v-on:deleteList="onDeleteList" :username="username"/>
+      <DueList :billsList="billsList" v-on:deleteList="onDeleteList" :username="username"   v-on:updateList="updateList"/>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" @click="openAddListModal"> 
         <ion-fab-button color="secondary">
           <ion-icon name="add"></ion-icon>
@@ -65,6 +65,9 @@ export default {
       }
       this.getAlldues(); //emit to the parent);
       console.log(value);
+    },
+    updateList(){
+      this.getAlldues()
     }
   }
 };

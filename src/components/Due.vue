@@ -34,17 +34,18 @@
             required
           ></ion-input>
         </ion-item>
-        <ion-item>
-          <ion-label position="stacked">Description e.g. Monthly payment of SSS</ion-label>
-          <ion-input
-            :value="description"
-            @input="description = $event.target.value"
-            clear-input="true"
-            spellcheck="true"
-            readonly
-            required
-          ></ion-input>
-        </ion-item>
+ <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Frequency</ion-label>
+            <ion-select  :value="frequency"
+            @ionBlur="frequency = $event.target.value" ok-text="Okay" cancel-text="Dismiss">
+             <ion-select-option value="0">Monthly</ion-select-option>
+              <ion-select-option value="1">Quarterly</ion-select-option>
+              <ion-select-option value="2">Semi-annually</ion-select-option>
+              <ion-select-option value="3">Annually</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
 
         <ion-item>
           <ion-label position="stacked">Scheduled Day e.g. 20</ion-label>
@@ -122,7 +123,7 @@ export default {
       //duenameDetails: {},
       bills_name: null,
       benefeciary_name: null,
-      description: null,
+      frequency: null,
       scheduled_day: null,
       amount: null,
        currency: null,
@@ -147,7 +148,7 @@ export default {
         this.updatedDue = {
           bills_name: this.bills_name,
           benefeciary_name: this.benefeciary_name,
-          description: this.description,
+          frequency: this.frequency,
           scheduled_day: this.scheduled_day,
           amount: this.amount,
           currency: this.currency
@@ -187,7 +188,7 @@ export default {
     this.id = this.duenameDetails.id;
     this.bills_name = this.duenameDetails.bills_name;
     this.benefeciary_name = this.duenameDetails.benefeciary_name;
-    this.description = this.duenameDetails.description;
+    this.frequency = this.duenameDetails.frequency;
     this.scheduled_day = this.duenameDetails.scheduled_day;
     this.amount = this.duenameDetails.amount;
      this.currency = this.duenameDetails.currency;

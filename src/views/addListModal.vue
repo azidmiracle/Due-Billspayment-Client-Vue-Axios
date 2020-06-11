@@ -28,16 +28,20 @@
             required
           ></ion-input>
         </ion-item>
-        <ion-item>
-          <ion-label position="stacked">Description e.g. Monthly payment of SSS</ion-label>
-          <ion-input
-            :value="description"
-            @input="description = $event.target.value"
-            clear-input="true"
-            spellcheck="true"
-            required
-          ></ion-input>
-        </ion-item>
+ <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Frequency</ion-label>
+            <ion-select  :value="frequency"
+            @ionBlur="frequency = $event.target.value" ok-text="Okay" cancel-text="Dismiss">
+              <ion-select-option value="0">Monthly</ion-select-option>
+              <ion-select-option value="1">Quarterly</ion-select-option>
+              <ion-select-option value="2">Semi-annually</ion-select-option>
+              <ion-select-option value="3">Annually</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+
 
         <ion-item>
           <ion-label position="stacked">Scheduled Day e.g. 20</ion-label>
@@ -70,7 +74,7 @@
           </ion-item>
         </ion-list>
         <ion-button
-          :disabled="bills_name==null || benefeciary_name==null || description==null || scheduled_day==null || amount==null || currency==null"
+          :disabled="bills_name==null || benefeciary_name==null || frequency==null || scheduled_day==null || amount==null || currency==null"
           type="submit"
           fill="solid"
           expand="block"
@@ -96,7 +100,7 @@ export default {
       lastId: 0,
       bills_name: null,
       benefeciary_name: null,
-      description: null,
+      frequency: null,
       scheduled_day: null,
       amount: null,
       currency:null,
@@ -114,7 +118,7 @@ export default {
           this.username,
           this.bills_name,
           this.benefeciary_name,
-          this.description,
+          this.frequency,
           this.scheduled_day,
           this.amount,
           this.currency

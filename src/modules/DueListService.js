@@ -9,7 +9,7 @@ class Due {
     username,
     bills_name,
     benefeciary_name,
-    description,
+    frequency,
     scheduled_day,
     amount,
     currency
@@ -18,7 +18,7 @@ class Due {
     this.username=username;
     this.bills_name = bills_name;
     this.benefeciary_name = benefeciary_name;
-    this.description = description;
+    this.frequency = frequency;
     this.scheduled_day = scheduled_day;
     this.amount = amount;
     this.currency = currency;
@@ -44,7 +44,7 @@ class Due {
       username: Dues["username"],
       bills_name: Dues["bills_name"],
       benefeciary_name: Dues["benefeciary_name"],
-      description: Dues["description"],
+      frequency: Dues["frequency"],
       scheduled_day: Dues["scheduled_day"],
       amount: Dues["amount"],
       currency: Dues["currency"],

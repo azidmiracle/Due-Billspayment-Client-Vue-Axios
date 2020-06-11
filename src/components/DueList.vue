@@ -7,8 +7,15 @@
       color="dark"
     >
       <ion-toolbar color="light">
-        <ion-title slot="start" class="ion-text-uppercase">{{ due.bills_name}}</ion-title>
-        <ion-button slot="end" :value="due.id" v-on:click="deleteDue(due.id)" color="danger">
+        <ion-title slot="start" class="ion-text-uppercase">{{
+          due.bills_name
+        }}</ion-title>
+        <ion-button
+          slot="end"
+          :value="due.id"
+          v-on:click="deleteDue(due.id)"
+          color="danger"
+        >
           <ion-icon name="close"></ion-icon>
         </ion-button>
       </ion-toolbar>
@@ -16,23 +23,24 @@
       <ion-card-content justify-content-center align-items-center>
         <ion-label>Beneficiary Name: {{ due.benefeciary_name }}</ion-label>
         <br />
-        <ion-label>Description: {{ due.description }}</ion-label>
+        <ion-label>Frequency: {{ getFrequency(due.frequency) }}</ion-label>
         <br />
-        <ion-label>Last Payment: {{ due.last_payment }}</ion-label>
+        <ion-label
+          >Last Payment: {{ getLastPayment(due.last_payment) }}</ion-label
+        >
         <br />
         <ion-label>
-          Due Date:
+          Next Payment:
           {{ getNextPaymentDate(due) }}
         </ion-label>
         <br />
         <ion-item>
           <ion-label>See Details</ion-label>
           <ion-button
-            
             slot="end"
             color="secondary"
-            :value=" due.bills_name"
-            @click="openDueModal(due.bills_name,due)"
+            :value="due.bills_name"
+            @click="openDueModal(due.bills_name, due)"
           >
             <ion-icon name="arrow-forward"></ion-icon>
           </ion-button>
@@ -49,7 +57,7 @@ export default {
   props: {
     msg: String,
     billsList: Array,
-    username:String
+    username: String,
   },
   data() {
     return {
@@ -58,21 +66,25 @@ export default {
       todayYear: null,
       billChild: this.billsList, //initially, the billList array from parent is pass to this variable,
       key: null,
-      nextPaymentDue: null
+      nextPaymentDue: null,
     };
   },
   methods: {
     deleteDue(key) {
       this.key = key;
-      this.$emit("deleteList", this.key);//emit the key to the Home.vue parent
+      this.$emit("deleteList", this.key); //emit the key to the Home.vue parent
     },
-    updateDetails(){
-      this.$emit("updateList");//emit the key to the Home.vue parent
+    updateDetails() {
+      this.$emit("updateList"); //emit the key to the Home.vue parent
     },
     seeDetails(bills_name, due) {
       this.$router.push({
         name: "due-name",
-        params: { duename: bills_name, duenameDetails: due , username: this.username}
+        params: {
+          duename: bills_name,
+          duenameDetails: due,
+          username: this.username,
+        },
       });
     },
     async openDueModal(bills_name, due) {
@@ -81,10 +93,10 @@ export default {
         componentProps: {
           propsData: {
             duename: bills_name,
-            duenameDetails: due ,
-            username:this.username
-          }
-        }
+            duenameDetails: due,
+            username: this.username,
+          },
+        },
       });
 
       // show the modal
@@ -95,15 +107,35 @@ export default {
     },
   },
   computed: {
-    getNextPaymentDate: function () {
-      return due=> this.todayMonth + " " + due.scheduled_day + ", " + this.todayYear;
-    }
+    getLastPayment: function() {
+      return (lastPayment) => new Date(lastPayment);
+    },
+    getNextPaymentDate: function() {
+      return function(due) {
+
+        if (due.last_payment != null) {//if there is a last payment done, calculate the next payment
+          let dt = this.getLastPayment(due.last_payment);
+          //get the frequency
+          let addMonth = [1, 3, 6, 12];//for monthly:add 1 month, quarterly: add 3 months etc....
+
+          return new Date(dt.setMonth(dt.getMonth() + addMonth[due.frequency]));
+        } else {//if there was no last payment done, just get the date this month...
+          return (
+            this.todayMonth + " " + due.scheduled_day + ", " + this.todayYear
+          );
+        }
+      };
+    },
+    getFrequency: function() {
+      let frequencyData = ["Monthly", "Quarterly", "Semi-annually", "Annually"];
+
+      return (index) => frequencyData[index];
+    },
   },
   created() {
     this.todayMonth = MyDate.getTodayMonth();
     this.todayYear = MyDate.getTodayYear();
-
-  }
+  },
 };
 </script>
 

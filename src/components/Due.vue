@@ -2,12 +2,14 @@
   <div class="ion-page">
     <ion-header>
       <ion-toolbar>
-        <ion-back-button default-href="tabs/home/" slot="start"></ion-back-button>
+        <ion-button slot="start" v-on:click="dismissModal()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
         <ion-card-title>Edit Bill Details</ion-card-title>
       </ion-toolbar>
     </ion-header>
     <ion-content padding="true">
-      <form id="dueName" @submit="onUpdate">
+      <form id="dueName" @submit="onUpdate"  action="/azid_miracle/home">
         <ion-item>
           <ion-label position="stacked">Bills name e.g. SSS</ion-label>
           <ion-input
@@ -107,12 +109,17 @@ import { Due } from "@/modules/DueListService.js";
 import addTransaction from "../views/addTransaction.vue";
 export default {
   name: "Due",
+  props:{
+            duename: String,
+            duenameDetails: Object ,
+            username:String
+  },
   data() {
     return {
-      duename: null,
+      //duename: null,
       id: null,
-      username:null,
-      duenameDetails: {},
+      //username:null,
+      //duenameDetails: {},
       bills_name: null,
       benefeciary_name: null,
       description: null,
@@ -131,8 +138,8 @@ export default {
         input_tags[i].readonly = false;
       }
     },
-    onUpdate(e) {
-      e.preventDefault();
+    onUpdate() {
+      //e.preventDefault();
       let isConfirmed = confirm("Do you want to update this bill?");
       if (isConfirmed) {
         //create new instance of user
@@ -144,8 +151,6 @@ export default {
           amount: this.amount,
           currency: this.currency
         };
-        console.log(newData);
-        console.log(this.id);
         Due.updateDue(this.id, newData);
       }
     },
@@ -170,13 +175,14 @@ export default {
       await modal.present();
 
       // update the lists
-      await modal.onDidDismiss().then(() => this.getAlldues());
+      //await modal.onDidDismiss().then(() => this.getAlldues());
+    },
+    //when the close button is close, it will dismiss the modal and pass the value of the new bill
+    dismissModal() {
+      this.$ionic.modalController.dismiss();
     }
   },
   mounted: function() {
-    this.username = this.$route.params.username;
-    this.duename = this.$route.params.duename;
-    this.duenameDetails = this.$route.params.duenameDetails;
     this.id = this.duenameDetails.id;
     this.bills_name = this.duenameDetails.bills_name;
     this.benefeciary_name = this.duenameDetails.benefeciary_name;

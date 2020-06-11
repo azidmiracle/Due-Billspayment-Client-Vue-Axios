@@ -32,7 +32,7 @@
             slot="end"
             color="secondary"
             :value=" due.bills_name"
-            @click="seeDetails(due.bills_name,due)"
+            @click="openDueModal(due.bills_name,due)"
           >
             <ion-icon name="arrow-forward"></ion-icon>
           </ion-button>
@@ -43,7 +43,7 @@
 </template>
 <script>
 import { MyDate } from "@/modules/DateController.js";
-
+import Due from "@/components/Due.vue";
 export default {
   name: "DueList",
   props: {
@@ -69,9 +69,27 @@ export default {
     seeDetails(bills_name, due) {
       this.$router.push({
         name: "due-name",
-        params: { duename: `${bills_name}`, duenameDetails: due , username: this.username}
+        params: { duename: bills_name, duenameDetails: due , username: this.username}
       });
-    }
+    },
+    async openDueModal(bills_name, due) {
+      let modal = await this.$ionic.modalController.create({
+        component: Due,
+        componentProps: {
+          propsData: {
+            duename: bills_name,
+            duenameDetails: due ,
+            username:this.username
+          }
+        }
+      });
+
+      // show the modal
+      await modal.present();
+
+      // update the lists
+      //await modal.onDidDismiss().then(() => this.getAlldues());
+    },
   },
   computed: {
     getNextPaymentDate: function () {

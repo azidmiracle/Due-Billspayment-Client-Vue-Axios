@@ -97,8 +97,8 @@ export default {
     };
   },
   methods: {
-    addTxn(e) {
-      e.preventDefault();
+    addTxn() {
+      //e.preventDefault();
       let isConfirmed = confirm("Do you want to add this transaction?");
 
       if (isConfirmed) {

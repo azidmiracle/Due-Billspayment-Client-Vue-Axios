@@ -1,18 +1,15 @@
 <template>
   <div class="ion-page">
-
-<ion-tabs @IonTabsWillChange="beforeTabChange" @IonTabsDidChange="afterTabChange">
-
+<ion-tabs>
     <!-- Get matched routes with a helper method -->
-    <ion-tab tab="home" :routes="getMatchedRoutes">
-      <Home />
+    <ion-tab tab="home" :routes="['home','due-name']" :to="{name:'home'}">
+      <Home/>
     </ion-tab>
-
     <!-- Use v-slot:bottom with Vue ^2.6.0 -->
     <template slot="bottom">
       <ion-tab-bar>
         <!-- Provide custom click handler -->
-        <ion-tab-button tab="home" @click="goToAboutTab">
+        <ion-tab-button tab="home">
           <ion-icon name="home"></ion-icon>
           <ion-label>Home</ion-label>
         </ion-tab-button>
@@ -28,7 +25,7 @@ import Home from "@/views/Home.vue";
 export default {
   name: "TabRoot",
   components: {
-    Home
+    Home,
   }
 };
 </script>

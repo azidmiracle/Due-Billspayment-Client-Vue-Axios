@@ -18,19 +18,18 @@ const routes = [
     component: () => import("@/components/TabRoot.vue"),
     children: [
       {
-        path: "home/",
+        path: "home",
         name: "home",
-        components: {
-          homeRoute: () => import("@/views/Home.vue"),
-        },
+        component: () => import("@/views/Home.vue"),
+        children:[
+          {
+            path: ":duename",
+            name: "due-name",
+            component:() => import("@/components/Due.vue") 
+          },
+        ]
       },
-      {
-        path: "home/:duename",
-        name: "due-name",
-        components: {
-          homeRoute: () => import("@/components/Due.vue"),
-        },
-      },
+    
     ],
   },
 

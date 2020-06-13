@@ -121,7 +121,8 @@ export default {
           this.frequency,
           this.scheduled_day,
           this.amount,
-          this.currency
+          this.currency,
+          []
         );
         Due.insertDue(this.newBill);
       }

@@ -1,12 +1,8 @@
 import Vue from "vue";
-//import VueRouter from 'vue-router'
+
 import { IonicVueRouter } from "@ionic/vue";
-//import TabRoot from "@/components/TabRoot.vue";
-//import Home from "@/views/Home.vue";
-//import Due from "@/components/Due.vue";
 
 Vue.use(IonicVueRouter);
-//Vue.use(VueRouter);
 
 const routes = [
   {
@@ -29,6 +25,11 @@ const routes = [
           },
         ]
       },
+      {
+        path: "History",
+        name: "History",
+        component: () => import("@/views/History.vue")
+      }
     
     ],
   },

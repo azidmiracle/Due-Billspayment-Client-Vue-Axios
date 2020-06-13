@@ -7,27 +7,31 @@
       color="purple"
     >
       <ion-toolbar color="light">
-        <ion-title slot="start" class="ion-text-uppercase">{{
+        <ion-title slot="start" class="ion-text-uppercase">
+          {{
           due.bills_name
-        }}</ion-title>
-        <ion-button
-          slot="end"
-          :value="due.id"
-          v-on:click="deleteDue(due.id)"
-          color="light"
-        >
+          }}
+        </ion-title>
+        <ion-button slot="end" :value="due.id" v-on:click="deleteDue(due.id)" color="light">
           <ion-icon name="close"></ion-icon>
         </ion-button>
       </ion-toolbar>
 
-      <ion-card-content justify-content-center align-items-center >
-        <ion-label ><b>Beneficiary Name: </b>{{ due.benefeciary_name.toUpperCase()}}</ion-label>
+      <ion-card-content justify-content-center align-items-center>
+        <ion-label>
+          <b>Beneficiary Name:</b>
+          {{ due.benefeciary_name.toUpperCase()}}
+        </ion-label>
         <br />
-        <ion-label><b>Frequency: </b>{{ getFrequency(due.frequency) }}</ion-label>
+        <ion-label>
+          <b>Frequency:</b>
+          {{ getFrequency(due.frequency) }}
+        </ion-label>
         <br />
-        <ion-label
-          ><b>Last Payment: </b>{{ getLastPayment(due.last_payment) }}</ion-label
-        >
+        <ion-label>
+          <b>Last Payment:</b>
+          {{ getLastPayment(due.txn) }}
+        </ion-label>
         <br />
         <ion-label>
           <b>Next Payment:</b>
@@ -35,7 +39,9 @@
         </ion-label>
         <br />
         <ion-item>
-          <ion-label><b>See Detail</b></ion-label>
+          <ion-label>
+            <b>See Detail</b>
+          </ion-label>
           <ion-button
             slot="end"
             color="secondary"
@@ -57,7 +63,7 @@ export default {
   props: {
     msg: String,
     billsList: Array,
-    username: String,
+    username: String
   },
   data() {
     return {
@@ -66,7 +72,7 @@ export default {
       todayYear: null,
       billChild: this.billsList, //initially, the billList array from parent is pass to this variable,
       key: null,
-      nextPaymentDue: null,
+      nextPaymentDue: null
     };
   },
   methods: {
@@ -83,8 +89,8 @@ export default {
         params: {
           duename: bills_name,
           duenameDetails: due,
-          username: this.username,
-        },
+          username: this.username
+        }
       });
     },
     async openDueModal(bills_name, due) {
@@ -94,9 +100,9 @@ export default {
           propsData: {
             duename: bills_name,
             duenameDetails: due,
-            username: this.username,
-          },
-        },
+            username: this.username
+          }
+        }
       });
 
       // show the modal
@@ -104,11 +110,22 @@ export default {
 
       // update the lists
       await modal.onDidDismiss().then(() => this.updateDetails());
-    },
+    }
   },
   computed: {
     getLastPayment: function() {
-      return (lastPayment) => new Date(lastPayment);
+      return function(lastPayment) {
+        // sort by value
+        let allDateTxn=[];//create array for date paid only
+        lastPayment.forEach(element => {
+            allDateTxn.push(new Date(element.date_paid))//push the dates to this array
+        });
+        allDateTxn.sort(function(a, b) {
+          return b - a;//sort from the latest date
+        });
+
+        return allDateTxn[0]//return the first value in the array
+      };
     },
     getNextPaymentDate: function() {
       return function(due) {
@@ -128,16 +145,16 @@ export default {
     },
     getFrequency: function() {
       let frequencyData = ["Monthly", "Quarterly", "Semi-annually", "Annually"];
-      return (index) => frequencyData[index];
-    },
+      return index => frequencyData[index];
+    }
   },
   created() {
     this.todayMonth = MyDate.getTodayMonth();
     this.todayYear = MyDate.getTodayYear();
-  },
+
+  }
 };
 </script>
 
 <style>
-
 </style>

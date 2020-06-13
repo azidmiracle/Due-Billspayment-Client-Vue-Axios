@@ -22,6 +22,7 @@ class Due {
     this.scheduled_day = scheduled_day;
     this.amount = amount;
     this.currency = currency;
+    this.txn=[]
   }
 
   static getAllDueLists(_username) {
@@ -29,7 +30,7 @@ class Due {
       try {
         axios.get(DueURL).then((res) => {
           const data = res.data;
-          resolve(data.filter(element=>element.username=_username));
+          resolve(data.filter(element=>element.username==_username));
         });
       } catch (err) {
         reject(err);
@@ -48,6 +49,7 @@ class Due {
       scheduled_day: Dues["scheduled_day"],
       amount: Dues["amount"],
       currency: Dues["currency"],
+      txn: []
     }).then(() =>{
       //return response.data.message;
       alert("Insert Successfully");

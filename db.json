@@ -27,7 +27,7 @@
   ],
   "dueLists": [
     {
-      "id": 4,
+      "id": 1,
       "username": "azid_miracle",
       "bills_name": "SSS",
       "benefeciary_name": "EMELY DIAZ",
@@ -35,40 +35,77 @@
       "scheduled_day": "12",
       "amount": "12",
       "currency": "sgd",
-      "last_payment": "2020-06-09T15:47:40.887Z"
+      "txn": [
+        {
+          "date_paid": "2020-06-10T09:56:41.082Z",
+          "amount": "12",
+          "currency": "sgd",
+          "paid_by": "asd",
+          "mode_payment": "asd"
+        },
+        {
+          "date_paid": "2020-06-13T10:24:26.906Z",
+          "amount": "12",
+          "currency": "sgd",
+          "paid_by": "sdsds",
+          "mode_payment": "sdsds"
+        }
+      ]
     },
     {
-      "id": 5,
+      "id": 2,
       "username": "azid_miracle",
       "bills_name": "SUNLIFE",
       "benefeciary_name": "CHARITA QUILICOL",
       "frequency": "2",
       "scheduled_day": "15",
       "amount": "1500",
-      "last_payment": "2020-06-13T03:08:44.819Z",
-      "currency": "php"
+      "currency": "php",
+      "txn": []
     },
     {
-      "id": 2,
+      "id": 3,
       "username": "azid_miracle",
       "bills_name": "CONDO VISTALAND",
       "benefeciary_name": "EMELY diaz LORIA",
       "frequency": 1,
       "scheduled_day": "10",
       "amount": "23000",
-      "last_payment": "2020-06-09T15:21:23.928Z",
-      "currency": "php"
+      "currency": "php",
+      "txn": []
     },
     {
-      "id": 7,
+      "id": 9,
       "username": "azid_miracle",
-      "bills_name": "ccccdddd",
-      "benefeciary_name": "ems",
-      "frequency": "3",
-      "scheduled_day": "30",
-      "amount": "1200",
-      "currency": "sgd",
-      "last_payment": "2020-06-11T11:14:12+08:00"
+      "bills_name": "awqwq",
+      "benefeciary_name": "qwqwq",
+      "frequency": "1",
+      "scheduled_day": "20",
+      "amount": "12",
+      "currency": "php",
+      "txn": [
+        {
+          "date_paid": "2020-06-13T10:06:16.111Z",
+          "amount": "12",
+          "currency": "php",
+          "paid_by": "asas",
+          "mode_payment": "q2asasa"
+        },
+        {
+          "date_paid": "2020-04-19T18:06:44+08:00",
+          "amount": "12",
+          "currency": "php",
+          "paid_by": "wwww",
+          "mode_payment": "wwwww"
+        },
+        {
+          "date_paid": "2020-06-13T10:38:47.898Z",
+          "amount": "12",
+          "currency": "php",
+          "paid_by": "sdsdsd",
+          "mode_payment": "sdsdsdsds"
+        }
+      ]
     }
   ],
   "transaction": [

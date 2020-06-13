@@ -2,6 +2,9 @@
   <div class="ion-page">
 <ion-tabs>
     <!-- Get matched routes with a helper method -->
+    <ion-tab tab="History" :routes="['History']" :to="{name:'History'}">
+      <History/>
+    </ion-tab>
     <ion-tab tab="home" :routes="['home','due-name']" :to="{name:'home'}">
       <Home/>
     </ion-tab>
@@ -9,6 +12,10 @@
     <template slot="bottom">
       <ion-tab-bar>
         <!-- Provide custom click handler -->
+         <ion-tab-button tab="History">
+          <ion-icon name="stats"></ion-icon>
+          <ion-label>History</ion-label>
+        </ion-tab-button>
         <ion-tab-button tab="home">
           <ion-icon name="home"></ion-icon>
           <ion-label>Home</ion-label>
@@ -21,11 +28,13 @@
 
 <script>
 // @ is an alias to /src
+import History from "@/views/History.vue";
 import Home from "@/views/Home.vue";
 export default {
   name: "TabRoot",
   components: {
     Home,
+    History
   }
 };
 </script>

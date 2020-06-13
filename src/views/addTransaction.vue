@@ -94,6 +94,7 @@ export default {
       mode_payment: null,
       amount: this._amount,
       currency: this._currency,
+      allTxns:[]
     };
   },
   methods: {
@@ -104,18 +105,16 @@ export default {
       if (isConfirmed) {
         //create new instance of user
         this.newTxn = new Transaction(
-          8,
-          this.due_id,
           this.date_paid,
           this.amount,
           this.currency,
           this.paid_by,
           this.mode_payment
         );
-        Transaction.insertTransaction(this.newTxn); //
-
-        //UPDATE THE DUE LIST TO INSERT LAST TRANSACTION//
-        Transaction.insertLastPaidToDue(this.due_id, this.date_paid); //
+        
+        //push to the allTransactions
+        this.allTxns.push( this.newTxn)
+        Transaction.insertTransaction(this.due_id,this.allTxns); //
       }
     },
     //when the close button is close, it will dismiss the modal and pass the value of the new bill
@@ -123,8 +122,8 @@ export default {
       this.$ionic.modalController.dismiss(this.newTxn);
     }
   },
-  mounted() {
-    
+  async mounted() {
+    this.allTxns= await Transaction.getAllTransactions(this.due_id)
   }
 };
 </script>

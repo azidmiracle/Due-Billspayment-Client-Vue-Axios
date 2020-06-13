@@ -56,14 +56,12 @@ export default {
       // update the lists
       await modal.onDidDismiss().then(() => this.getAlldues());
     },
-
     // Triggered when `childToParent` event is emitted by the child.
     onDeleteList(value) {
       let isDeleted = confirm("Do you want to delete?");
       if (isDeleted) {
-        Due.deleteDue(value);
+        Due.deleteDue(value).then(()=> this.getAlldues()); 
       }
-      this.getAlldues(); //emit to the parent);
       console.log(value);
     },
     updateList(){

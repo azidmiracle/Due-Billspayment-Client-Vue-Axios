@@ -1,7 +1,7 @@
 <template>
   <div class="ion-page">
     <ion-header>
-      <ion-toolbar color="dark">
+      <ion-toolbar color="purple">
         <ion-title slot="start">Enroll Bill</ion-title>
         <ion-buttons slot="end">
           <ion-button v-on:click="dismissModal()">Close</ion-button>

@@ -4,7 +4,7 @@
       v-for="(due, index) in billsList"
       v-bind:index="index"
       v-bind:key="due.id"
-      color="dark"
+      color="purple"
     >
       <ion-toolbar color="light">
         <ion-title slot="start" class="ion-text-uppercase">{{
@@ -14,28 +14,28 @@
           slot="end"
           :value="due.id"
           v-on:click="deleteDue(due.id)"
-          color="danger"
+          color="light"
         >
           <ion-icon name="close"></ion-icon>
         </ion-button>
       </ion-toolbar>
 
-      <ion-card-content justify-content-center align-items-center>
-        <ion-label>Beneficiary Name: {{ due.benefeciary_name }}</ion-label>
+      <ion-card-content justify-content-center align-items-center >
+        <ion-label ><b>Beneficiary Name: </b>{{ due.benefeciary_name.toUpperCase()}}</ion-label>
         <br />
-        <ion-label>Frequency: {{ getFrequency(due.frequency) }}</ion-label>
+        <ion-label><b>Frequency: </b>{{ getFrequency(due.frequency) }}</ion-label>
         <br />
         <ion-label
-          >Last Payment: {{ getLastPayment(due.last_payment) }}</ion-label
+          ><b>Last Payment: </b>{{ getLastPayment(due.last_payment) }}</ion-label
         >
         <br />
         <ion-label>
-          Next Payment:
+          <b>Next Payment:</b>
           {{ getNextPaymentDate(due) }}
         </ion-label>
         <br />
         <ion-item>
-          <ion-label>See Details</ion-label>
+          <ion-label><b>See Detail</b></ion-label>
           <ion-button
             slot="end"
             color="secondary"
@@ -112,14 +112,14 @@ export default {
     },
     getNextPaymentDate: function() {
       return function(due) {
-
-        if (due.last_payment != null) {//if there is a last payment done, calculate the next payment
+        if (due.last_payment != null) {
+          //if there is a last payment done, calculate the next payment
           let dt = this.getLastPayment(due.last_payment);
           //get the frequency
-          let addMonth = [1, 3, 6, 12];//for monthly:add 1 month, quarterly: add 3 months etc....
-
+          let addMonth = [1, 3, 6, 12]; //for monthly:add 1 month, quarterly: add 3 months etc....
           return new Date(dt.setMonth(dt.getMonth() + addMonth[due.frequency]));
-        } else {//if there was no last payment done, just get the date this month...
+        } else {
+          //if there was no last payment done, just get the date this month...
           return (
             this.todayMonth + " " + due.scheduled_day + ", " + this.todayYear
           );
@@ -128,7 +128,6 @@ export default {
     },
     getFrequency: function() {
       let frequencyData = ["Monthly", "Quarterly", "Semi-annually", "Annually"];
-
       return (index) => frequencyData[index];
     },
   },
@@ -140,6 +139,5 @@ export default {
 </script>
 
 <style>
-.lists {
-}
+
 </style>

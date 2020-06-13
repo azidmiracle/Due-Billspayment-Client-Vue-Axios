@@ -1,7 +1,7 @@
 <template>
   <div class="ion-page">
     <ion-header>
-      <ion-toolbar color="dark">
+      <ion-toolbar color="purple">
         <ion-title slot="start">Add Transaction</ion-title>
         <ion-buttons slot="end">
           <ion-button v-on:click="dismissModal()">Close</ion-button>
@@ -97,8 +97,8 @@ export default {
     };
   },
   methods: {
-    addTxn() {
-      //e.preventDefault();
+    addTxn(e) {
+      e.preventDefault();
       let isConfirmed = confirm("Do you want to add this transaction?");
 
       if (isConfirmed) {

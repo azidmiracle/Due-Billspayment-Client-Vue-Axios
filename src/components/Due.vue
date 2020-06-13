@@ -1,8 +1,8 @@
 <template>
   <div class="ion-page">
     <ion-header>
-      <ion-toolbar>
-        <ion-button slot="start" v-on:click="dismissModal()">
+      <ion-toolbar color="light">
+        <ion-button slot="start" v-on:click="dismissModal()" color="primary">
           <ion-icon name="arrow-back"></ion-icon>
         </ion-button>
         <ion-card-title>Edit Bill Details</ion-card-title>

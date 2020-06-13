@@ -45,7 +45,8 @@
       "frequency": "2",
       "scheduled_day": "15",
       "amount": "1500",
-      "last_payment": "2020-06-11T03:25:05.375Z"
+      "last_payment": "2020-06-13T03:08:44.819Z",
+      "currency": "php"
     },
     {
       "id": 2,
@@ -59,15 +60,15 @@
       "currency": "php"
     },
     {
-      "id": 9,
+      "id": 8,
       "username": "azid_miracle",
-      "bills_name": "xdsd",
-      "benefeciary_name": "sdsd",
+      "bills_name": "cccc",
+      "benefeciary_name": "ems",
       "frequency": "3",
-      "scheduled_day": "20",
+      "scheduled_day": "30",
       "amount": "1200",
-      "currency": "php"
-      
+      "currency": "sgd",
+      "last_payment": "2020-06-11T11:14:12+08:00"
     }
   ],
   "transaction": [
@@ -115,13 +116,22 @@
       "mode_payment": "ASASA"
     },
     {
-      "id": 8,
-      "due_id": 9,
-      "date_paid": "2020-06-11T15:27:54.567Z",
-      "amount": "1200",
+      "id": 7,
+      "due_id": 8,
+      "date_paid": "2020-06-13T03:06:35.804Z",
+      "amount": "12",
       "currency": "php",
-      "paid_by": "sdsds",
-      "mode_payment": "sdsds"
+      "paid_by": "ems",
+      "mode_payment": "asasa"
+    },
+    {
+      "id": 8,
+      "due_id": 5,
+      "date_paid": "2020-06-13T03:08:44.819Z",
+      "amount": "1500",
+      "currency": "php",
+      "paid_by": "zxzx",
+      "mode_payment": "zxzxzxzxz"
     }
   ]
 }

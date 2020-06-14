@@ -6,16 +6,15 @@ const User = require("../model/Users.model");
 
 // Get all subscribers
 
-router.get("/", async (req, res, next) => {
+router.get("/:username", async (req, res, next) => {
   //res.send("Getting data");
     try{
-        const user = await User.find({})
+        const user = await User.findOne({username:req.params.username})
         res.json(user)
     }catch (err) {
         res.json(err);
       }
 });
-
 // Create one subscriber
 router.post("/", async (req, res, next) => {
   //console.log(req.body)

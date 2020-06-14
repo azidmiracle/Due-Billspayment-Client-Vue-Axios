@@ -6,10 +6,10 @@ const dueLists = require("../model/DueList.model");
 
 // Get all dues
 
-router.get("/", async (req, res, next) => {
+router.get("/:username", async (req, res, next) => {
   //res.send("Getting data");
   try {
-    const due = await dueLists.find({});
+    const due = await dueLists.find({username: req.params.username});
     res.json(due);
   } catch (err) {
     res.json(err);

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let DueURL = "http://localhost:3000/dueLists/";
+let DueURL = "http://localhost:5000/dueLists/txn/";
 //new instance of a Due
 class Transaction {
   constructor(date_paid, amount,currency,paid_by, mode_payment) {
@@ -11,12 +11,12 @@ class Transaction {
     this.mode_payment = mode_payment;
   }
 
-  static getAllTransactions(due_id) {
+  static getThisTxn(id) {
     return new Promise((resolve, reject) => {
       try {
-        axios.get(DueURL).then((res) => {
+        axios.get(`${DueURL}${id}`).then((res) => {
           const data = res.data;
-          resolve(data.filter(element=>element.id==due_id)[0]["txn"]);
+          resolve(data);
           //resolve(data);
         });
       } catch (err) {
@@ -27,7 +27,7 @@ class Transaction {
 
   //create Due
   static insertTransaction(id,data) {  
-    return axios.patch(`${DueURL}${id}`, {
+    return axios.post(`${DueURL}${id}`, {
       "txn":data
     }).then(() =>{
       alert("Update Successfully");
@@ -35,15 +35,6 @@ class Transaction {
       alert(err);
     })
   }
-
-
-  //insert the transaction last paid
-  static insertLastPaidToDue(id,last_paid) {
-    return axios.patch(`${DueURL}${id}`, {
-      last_payment: last_paid,
-    })
-  }
-
 
 }
 

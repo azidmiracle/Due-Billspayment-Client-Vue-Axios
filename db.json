@@ -77,8 +77,8 @@
     {
       "id": 9,
       "username": "azid_miracle",
-      "bills_name": "awqwq",
-      "benefeciary_name": "qwqwq",
+      "bills_name": "ENERGY",
+      "benefeciary_name": "SABA BIHIRA",
       "frequency": "1",
       "scheduled_day": "20",
       "amount": "12",
@@ -104,6 +104,13 @@
           "currency": "php",
           "paid_by": "sdsdsd",
           "mode_payment": "sdsdsdsds"
+        },
+        {
+          "date_paid": "2020-06-14T18:45:31+08:00",
+          "amount": "12",
+          "currency": "php",
+          "paid_by": "sdsdsd",
+          "mode_payment": "qwqwqw"
         }
       ]
     }

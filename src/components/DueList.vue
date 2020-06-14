@@ -1,9 +1,10 @@
 <template>
-  <div class="lists">
+  <div >
     <ion-card
-      v-for="(due, index) in billsList"
-      v-bind:index="index"
-      v-bind:key="due.id"
+         v-for="(due,index) in billsList"
+        v-bind:item="due"
+        v-bind:index="index"
+        v-bind:key="due._id"
       color="purple"
     >
       <ion-toolbar color="light">
@@ -12,7 +13,7 @@
           due.bills_name
           }}
         </ion-title>
-        <ion-button slot="end" :value="due.id" v-on:click="deleteDue(due.id)" color="light">
+        <ion-button slot="end" :value="due._id" v-on:click="deleteDue(due._id)" color="light">
           <ion-icon name="close"></ion-icon>
         </ion-button>
       </ion-toolbar>
@@ -67,10 +68,8 @@ export default {
   },
   data() {
     return {
-      //dues: [],
       todayMonth: "",
       todayYear: null,
-      billChild: this.billsList, //initially, the billList array from parent is pass to this variable,
       key: null,
       nextPaymentDue: null
     };

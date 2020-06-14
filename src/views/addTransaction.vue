@@ -113,8 +113,8 @@ export default {
         );
         
         //push to the allTransactions
-        this.allTxns.push( this.newTxn)
-        Transaction.insertTransaction(this.due_id,this.allTxns); //
+        //this.allTxns.push( this.newTxn)
+        Transaction.insertTransaction(this.due_id,this.newTxn); //
       }
     },
     //when the close button is close, it will dismiss the modal and pass the value of the new bill
@@ -123,7 +123,7 @@ export default {
     }
   },
   async mounted() {
-    this.allTxns= await Transaction.getAllTransactions(this.due_id)
+    this.allTxns= await Transaction.getThisTxn(this.due_id)
   }
 };
 </script>

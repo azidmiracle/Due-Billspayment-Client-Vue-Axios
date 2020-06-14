@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let userURL = "http://localhost:3000/users/";
+let userURL = "http://localhost:5000/user/";
 
 //new instance of a user
 class User {

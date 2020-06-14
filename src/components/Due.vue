@@ -9,7 +9,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content padding="true">
-      <form id="dueName" @submit="onUpdate"  action="/azid_miracle/home">
+      <form id="dueName" @submit="onUpdate"  >
         <ion-item>
           <ion-label position="stacked">Bills name e.g. SSS</ion-label>
           <ion-input
@@ -185,7 +185,7 @@ export default {
     }
   },
   mounted: function() {
-    this.id = this.duenameDetails.id;
+    this.id = this.duenameDetails._id;
     this.bills_name = this.duenameDetails.bills_name;
     this.benefeciary_name = this.duenameDetails.benefeciary_name;
     this.frequency = this.duenameDetails.frequency;

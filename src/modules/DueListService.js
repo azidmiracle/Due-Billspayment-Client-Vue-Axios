@@ -1,11 +1,10 @@
 import axios from "axios";
 
-let DueURL = "http://localhost:3000/dueLists/";
+let DueURL = "http://localhost:5000/dueLists";
 
 //new instance of a Due
 class Due {
   constructor(
-    id,
     username,
     bills_name,
     benefeciary_name,
@@ -14,7 +13,6 @@ class Due {
     amount,
     currency
   ) {
-    this.id = id;
     this.username=username;
     this.bills_name = bills_name;
     this.benefeciary_name = benefeciary_name;
@@ -41,7 +39,6 @@ class Due {
   //create Due
   static insertDue(Dues) {  
     return axios.post(DueURL, {
-      id: Dues["id"],
       username: Dues["username"],
       bills_name: Dues["bills_name"],
       benefeciary_name: Dues["benefeciary_name"],
@@ -59,8 +56,15 @@ class Due {
   }
 
   //create Due
-  static updateDue(id,data) {  
-    return axios.patch(`${DueURL}${id}`, data).then(() =>{
+  static updateDue(id,Dues) {  
+    return axios.patch(`${DueURL}/${id}`, {
+    bills_name: Dues["bills_name"],
+      benefeciary_name: Dues["benefeciary_name"],
+      frequency: Dues["frequency"],
+      scheduled_day: Dues["scheduled_day"],
+      amount: Dues["amount"],
+      currency: Dues["currency"]
+    }).then(() =>{
       //return response.data.message;
       alert("Update Successfully");
     }).catch(err =>{
@@ -70,7 +74,7 @@ class Due {
 
   //delete Due
   static deleteDue(id) {
-    return axios.delete(`${DueURL}${id}`);
+    return axios.delete(`${DueURL}/${id}`);
   }
 
 

@@ -97,7 +97,6 @@ export default {
     return {
       content: "Content",
       newBill: {},
-      lastId: 0,
       bills_name: null,
       benefeciary_name: null,
       frequency: null,
@@ -114,7 +113,6 @@ export default {
       if (isConfirmed) {
         //create new instance of user
         this.newBill = new Due(
-          9,
           this.username,
           this.bills_name,
           this.benefeciary_name,

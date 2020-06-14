@@ -12,19 +12,19 @@ class User {
     this.country = country;
   }
 
-  static getAllUserLists() {
+  static getUser(username) {
 
     return new Promise((resolve, reject) => {
       try {
-        axios.get(userURL).then((res) => {
+        axios.get(`${userURL}${username}`).then((res) => {
           const data = res.data;
+         // console.log(data)
           resolve(data);
         });
       } catch (err) {
         reject(err);
       }
     });
-    
   }
 
   //create user

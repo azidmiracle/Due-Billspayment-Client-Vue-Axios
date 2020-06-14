@@ -23,12 +23,13 @@ class Due {
     this.txn=[]
   }
 
-  static getAllDueLists(_username) {
+  static getAllDueLists(username) {
     return new Promise((resolve, reject) => {
       try {
-        axios.get(DueURL).then((res) => {
+        axios.get(`${DueURL}/${username}`).then((res) => {
           const data = res.data;
-          resolve(data.filter(element=>element.username==_username));
+          console.log(data)
+          resolve(data);
         });
       } catch (err) {
         reject(err);

@@ -48,21 +48,18 @@ export default {
       username: null,
       password: null,
       isExisting: false,
-      allUsers: {},
+      User: {},
     };
   },
   methods: {
     async logIn() {
       //check if the username and password exists in users database
-      this.allUsers = await User.getAllUserLists();
-      let accontuNumberArr = this.allUsers.map((element) => element.username);
-
-      //let isFound = false;
-      let index = accontuNumberArr.indexOf(this.username);
-      if (index >= 0) {
+      this.User = await User.getUser(this.username);
+      let userPwd= this.User["password"]
+      console.log(this.User["username"])
+      if ( this.User!=null) {
         //match the password
-        let user = this.allUsers[index];
-        if (user.password == this.password) {
+        if (userPwd == this.password) {
           //isFound = true;
           //this.$router.push("/tabs/home");
 

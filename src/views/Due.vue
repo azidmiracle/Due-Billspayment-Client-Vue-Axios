@@ -107,7 +107,7 @@
 
 <script>
 import { Due } from "@/modules/DueListService.js";
-import addTransaction from "../views/addTransaction.vue";
+import addTransaction from "@/views/addTransaction.vue";
 export default {
   name: "Due",
   props:{

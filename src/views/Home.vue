@@ -57,6 +57,8 @@ export default {
   mounted() {
     this.getAlldues();
     this.username = this.$route.params.username;
+    console.log(this.billsList)
+
   },
   methods: {
     async getAlldues() {
@@ -86,7 +88,7 @@ export default {
       if (isDeleted) {
         Due.deleteDue(value).then(() => this.getAlldues());
       }
-      console.log(value);
+      //console.log(value);
     },
     updateList() {//this is called everytime the child component has changes
       this.getAlldues();

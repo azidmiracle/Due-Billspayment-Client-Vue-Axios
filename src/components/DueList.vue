@@ -31,7 +31,7 @@
         <br />
         <ion-label>
           <b>Last Payment:</b>
-          {{ getLastPayment(due.txn) }}
+          {{ getLastPayment(due.txn[0]) }}
         </ion-label>
         <br />
         <ion-label>
@@ -58,7 +58,7 @@
 </template>
 <script>
 import { MyDate } from "@/modules/DateController.js";
-import Due from "@/components/Due.vue";
+import Due from "../views/Due";
 export default {
   name: "DueList",
   props: {
@@ -128,9 +128,9 @@ export default {
     },
     getNextPaymentDate: function() {
       return function(due) {
-        if (due.last_payment != null) {
+        let dt = this.getLastPayment(due.txn[0]);
+        if (dt != null) {
           //if there is a last payment done, calculate the next payment
-          let dt = this.getLastPayment(due.last_payment);
           //get the frequency
           let addMonth = [1, 3, 6, 12]; //for monthly:add 1 month, quarterly: add 3 months etc....
           return new Date(dt.setMonth(dt.getMonth() + addMonth[due.frequency]));

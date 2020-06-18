@@ -21,7 +21,7 @@ const routes = [
           {
             path: ":duename",
             name: "due-name",
-            component:() => import("@/components/Due.vue") 
+            component:() => import("@/views/Due.vue") 
           },
         ]
       },

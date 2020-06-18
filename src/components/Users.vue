@@ -47,7 +47,7 @@ export default {
     },
     deleteUser(key) {
       User.deleteUser(key);
-      console.log(key);
+      //console.log(key);
       this.getAllUsers();
     },
     addUser() {

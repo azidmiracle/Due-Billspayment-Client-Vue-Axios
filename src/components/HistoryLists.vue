@@ -77,7 +77,7 @@ export default {
   computed: {
     //get the month
     getMonthName: function() {
-      return (monthNum) => MyDate.getMonth(monthNum - 1);
+      return (monthNum) => MyDate.getMonthName(monthNum - 1);
     },
   },
   mounted() {

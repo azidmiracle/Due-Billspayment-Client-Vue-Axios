@@ -25,10 +25,22 @@ class MyDate {
 
     return year
   }
-  static getMonth(monthNum) {   
+  static getMonthName(monthNum) {   
     return month[monthNum].slice(0, 3);
   }
 
+  static getMonthNameComplete(monthNum) {   
+    return month[monthNum];
+  }
+
+  static formatDate(date){
+    let formattedDate=this.getMonthNameComplete(date.getMonth()) +
+    " " +
+    date.getDate() +
+    ", " +
+    date.getFullYear()
+    return formattedDate
+  }
 
 }
 

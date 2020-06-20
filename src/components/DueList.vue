@@ -1,19 +1,22 @@
 <template>
-  <div >
+  <div>
     <ion-card
-         v-for="(due,index) in billsList"
-        v-bind:item="due"
-        v-bind:index="index"
-        v-bind:key="due._id"
+      v-for="(due, index) in billsList"
+      v-bind:item="due"
+      v-bind:index="index"
+      v-bind:key="due._id"
       color="purple"
     >
       <ion-toolbar color="light">
         <ion-title slot="start" class="ion-text-uppercase">
-          {{
-          due.bills_name
-          }}
+          {{ due.bills_name }}
         </ion-title>
-        <ion-button slot="end" :value="due._id" v-on:click="deleteDue(due._id)" color="light">
+        <ion-button
+          slot="end"
+          :value="due._id"
+          v-on:click="deleteDue(due._id)"
+          color="light"
+        >
           <ion-icon name="close"></ion-icon>
         </ion-button>
       </ion-toolbar>
@@ -21,7 +24,7 @@
       <ion-card-content justify-content-center align-items-center>
         <ion-label>
           <b>Beneficiary Name:</b>
-          {{ due.benefeciary_name.toUpperCase()}}
+          {{ due.benefeciary_name.toUpperCase() }}
         </ion-label>
         <br />
         <ion-label>
@@ -31,12 +34,12 @@
         <br />
         <ion-label>
           <b>Last Payment:</b>
-          {{ getLastPayment(due.txn[0]) }}
+          {{getLastPayment(due.txn[0])[1] }}
         </ion-label>
         <br />
         <ion-label>
           <b>Next Payment:</b>
-          {{ getNextPaymentDate(due) }}
+          {{getNextPaymentDate(due)}}
         </ion-label>
         <br />
         <ion-item>
@@ -64,14 +67,14 @@ export default {
   props: {
     msg: String,
     billsList: Array,
-    username: String
+    username: String,
   },
   data() {
     return {
       todayMonth: "",
       todayYear: null,
       key: null,
-      nextPaymentDue: null
+      nextPaymentDue: null,
     };
   },
   methods: {
@@ -88,8 +91,8 @@ export default {
         params: {
           duename: bills_name,
           duenameDetails: due,
-          username: this.username
-        }
+          username: this.username,
+        },
       });
     },
     async openDueModal(bills_name, due) {
@@ -99,9 +102,9 @@ export default {
           propsData: {
             duename: bills_name,
             duenameDetails: due,
-            username: this.username
-          }
-        }
+            username: this.username,
+          },
+        },
       });
 
       // show the modal
@@ -109,32 +112,47 @@ export default {
 
       // update the lists
       await modal.onDidDismiss().then(() => this.updateDetails());
-    }
+    },
   },
   computed: {
     getLastPayment: function() {
       return function(lastPayment) {
         // sort by value
         //console.log(lastPayment)
-        let allDateTxn=[];//create array for date paid only
-        lastPayment.forEach(element => {
-            allDateTxn.push(new Date(element.date_paid))//push the dates to this array
+        let allDateTxn = []; //create array for date paid only
+        lastPayment.forEach((element) => {
+          allDateTxn.push(new Date(element.date_paid)); //push the dates to this array
         });
         allDateTxn.sort(function(a, b) {
-          return b - a;//sort from the latest date
+          return b - a; //sort from the latest date
         });
 
-        return allDateTxn[0]//return the first value in the array
+        let lastPyntDate = new Date(allDateTxn[0])//allDateTxn[0];
+        let formatted_dateLP =
+          MyDate.getMonthNameComplete(lastPyntDate.getMonth()) +
+          " " +
+          lastPyntDate.getDate() +
+          ", " +
+          lastPyntDate.getFullYear();
+         if(allDateTxn[0]==null){
+           formatted_dateLP="-"
+         }
+         let dateArr=[allDateTxn[0],formatted_dateLP] 
+        return dateArr//MyDate.formatDate(lastPyntDate); //return the first value in the array
       };
     },
     getNextPaymentDate: function() {
       return function(due) {
-        let dt = this.getLastPayment(due.txn[0]);
+        let dt = this.getLastPayment(due.txn[0])[0];
         if (dt != null) {
           //if there is a last payment done, calculate the next payment
           //get the frequency
           let addMonth = [1, 3, 6, 12]; //for monthly:add 1 month, quarterly: add 3 months etc....
-          return new Date(dt.setMonth(dt.getMonth() + addMonth[due.frequency]));
+          let newDate = new Date(
+            dt.setMonth(dt.getMonth() + addMonth[due.frequency])
+          );
+
+          return MyDate.formatDate(newDate);
         } else {
           //if there was no last payment done, just get the date this month...
           return (
@@ -145,16 +163,14 @@ export default {
     },
     getFrequency: function() {
       let frequencyData = ["Monthly", "Quarterly", "Semi-annually", "Annually"];
-      return index => frequencyData[index];
-    }
+      return (index) => frequencyData[index];
+    },
   },
   created() {
     this.todayMonth = MyDate.getTodayMonth();
     this.todayYear = MyDate.getTodayYear();
-
-  }
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

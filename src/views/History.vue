@@ -1,22 +1,40 @@
 <template>
-    <historyChart/>
+<div>
+<historyChart/>
+    <HistoryLists
+     :historyLists="historyLists"
+     :username="username"
+    />
+</div>
+
+    
 </template>
 
 <script>
-import { Transaction } from "@/modules/TransactionService.js";
+import { TxnHistory } from "@/modules/TxnHistoryService.js";
 import historyChart from "@/components/historyChart.vue";
+import HistoryLists from "@/components/HistoryLists.vue";
 export default {
     name:'History',
     components:{
-        historyChart
+        historyChart,
+        HistoryLists
+    },
+    data(){
+        return{
+           historyLists:null,
+           username:null
+        }
     },
     mounted(){
-
+        this.getAllTxns()
+        this.username = this.$route.params.username;
+        console.log (this.$route.params.username)
     },
     methods:{
     async getAllTxns() {
-      this.billsList = await Transaction.getAllTransactions(this.$route.params.username);
-      this.billList_Orig = this.billsList; //save the value to the billListoRIG for search purpose
+      this.historyLists = await TxnHistory.getAllTransactions(this.$route.params.username);
+      
     }
     }
 

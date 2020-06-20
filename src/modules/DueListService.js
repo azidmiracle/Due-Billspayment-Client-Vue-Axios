@@ -28,7 +28,7 @@ class Due {
       try {
         axios.get(`${DueURL}/${username}`).then((res) => {
           const data = res.data;
-          console.log(data)
+          //console.log(data)
           resolve(data);
         });
       } catch (err) {

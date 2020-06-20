@@ -1,3 +1,6 @@
+/*MODULE DESCRIPTION
+THIS MODULE IS USED TO GET ALL THE DUES
+*/
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
@@ -8,20 +11,19 @@ const dueLists = require("../model/DueList.model");
 router.get("/:username", async (req, res, next) => {
   //res.send("Getting data");
   try {
-    //get the date today
+    
+    let todayDate = new Date();//get the date today
 
-    let todayDate = new Date();
-
-    let threemonthAgo = new Date(todayDate.setMonth(todayDate.getMonth() - 1));
+    let prevMonth = new Date(todayDate.setMonth(todayDate.getMonth() - 1));//get the date previous 12 months
 
     const due = await dueLists.aggregate([
       {
-        $match: {
+        $match: {//FIRST STAGE: GET THE LISTS WHERE THE username equals to the logged username
           username: req.params.username,
         },
       },
       {
-        $project: {
+        $project: {//SECOND STAGE: project the necessary fiels
           username: 1,
           bills_name: 1,
           benefeciary_name: 1,
@@ -29,7 +31,7 @@ router.get("/:username", async (req, res, next) => {
           scheduled_day: 1,
           amount: 1,
           currency: 1,
-          txn: [
+          txn: [//filter the transaction where the txn.date_paid is equal or greater than the prevMonth variable
             {
               $filter: {
                 input: "$txn",
@@ -37,7 +39,7 @@ router.get("/:username", async (req, res, next) => {
                 cond: {
                   $and: [
                     {
-                      $gt: ["$$txn.date_paid", threemonthAgo],
+                      $gte: ["$$txn.date_paid", prevMonth],
                     },
                   ],
                 },
@@ -46,71 +48,19 @@ router.get("/:username", async (req, res, next) => {
           ],
         },
       },
-      { $sort: { bills_name: 1 } },
+      { $sort: { bills_name: 1 } },//THIRD STAGE: once projected, can sort the output by bills name
     ]);
-    res.json(due);
+    res.json(due);//return the value and pass it to the client side
   } catch (err) {
     res.json(err);
   }
 });
 
-/*
-
-// Get all dues
-
-router.get("/:username", async (req, res, next) => {
-  //res.send("Getting data");
-  try {
-    const due = await dueLists.aggregate().match(
-      { username: req.params.username }
-    ).project({
-      username: 1,
-      bills_name: 1,
-      benefeciary_name: 1,
-      frequency: 1,
-      scheduled_day: 1,
-      amount: 1,
-      currency: 1,
-      txn: {
-        $filter: {
-          input: "$txn",
-          as: "txn",
-          cond: {
-            $and: [
-              {
-                $gt: [
-                  "$$txn.date_paid",
-                  ISODate("2020-06-10T19:31:01.279Z"),
-                ],
-              },
-            ],
-          },
-        },
-      },
-    });
-    res.json(due);
-  } catch (err) {
-    res.json(err);
-  }
-});
-*/
-/*
-router.get("/:username", async (req, res, next) => {
-  //res.send("Getting data");
-  try {
-    const due = await dueLists.find({username: req.params.username});
-    res.json(due);
-  } catch (err) {
-    res.json(err);
-  }
-});
-
-*/
 
 // Create one due
 router.post("/", async (req, res, next) => {
-  //console.log(req.body)
-  const due = new dueLists({
+
+  const due = new dueLists({//INSERT THIS VALUE TO THE DUELIST COLLECTION
     _id: new mongoose.Types.ObjectId(),
     username: req.body.username,
     bills_name: req.body.bills_name,

@@ -57,7 +57,7 @@ export default {
   mounted() {
     this.getAlldues();
     this.username = this.$route.params.username;
-    console.log(this.billsList)
+    //console.log(this.billsList)
 
   },
   methods: {

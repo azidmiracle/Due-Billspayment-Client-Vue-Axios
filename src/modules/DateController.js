@@ -25,6 +25,9 @@ class MyDate {
 
     return year
   }
+  static getMonth(monthNum) {   
+    return month[monthNum].slice(0, 3);
+  }
 
 
 }

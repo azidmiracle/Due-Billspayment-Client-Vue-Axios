@@ -3,15 +3,10 @@
     <ion-content class="ion-padding">
   <HistoryLists
         :historyLists="historyLists"
-        :username="username"
+        :user_id="user_id"
         />
-    </ion-content>
-   
-      
-
-    </div>
-
-    
+    </ion-content> 
+    </div> 
 </template>
 
 <script>
@@ -31,17 +26,17 @@ export default {
     data(){
         return{
            //historyLists:null,
-           username:null
+           user_id:null
         }
     },
     created(){
         //this.getAllTxns()
-        //this.username = this.$route.params.username;
-        //console.log (this.$route.params.username)
+        //this.user_id = this.$route.params.user_id;
+        //console.log (this.$route.params.user_id)
     },
     methods:{
     //async getAllTxns() {
-      //this.historyLists = await TxnHistory.getAllTransactions(this.$route.params.username);
+      //this.historyLists = await TxnHistory.getAllTransactions(this.$route.params.user_id);
       
     //}
     }

@@ -30,7 +30,6 @@ export default {
   --ion-color-purple-shade: #5ca56c;
   --ion-color-purple-tint: #726a95;
 
-
 }
 
 .ion-color-lightGreen {
@@ -52,6 +51,12 @@ export default {
 }
 
 
+.borderRad-20{
+    --border-radius:20px
+}
 
+.borderRad-40{
+    --border-radius:40px
+}
 
 </style>

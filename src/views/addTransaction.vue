@@ -83,7 +83,7 @@ export default {
     _amount: String,
     due_id: Number,
     _currency: String,
-    username:String
+    user_id:String
   },
   data() {
     return {
@@ -100,7 +100,7 @@ export default {
   methods: {
     addTxn(e) {
       e.preventDefault();
-      let isConfirmed = confirm("Do you want to add this transaction?");
+      let isConfirmed = confirm("Transaction cannot be deleted or edited anymore once added. \n Do you want to add this transaction?");
 
       if (isConfirmed) {
         //create new instance of user

@@ -18,7 +18,7 @@
       <DueList
         :billsList="billsList"
         v-on:deleteList="onDeleteList"
-        :username="username"
+        :user_id="user_id"
         v-on:updateList="updateList"
       />
       <ion-fab
@@ -49,20 +49,20 @@ export default {
     return {
       billsList: null,
       billList_Orig: null, //save the lists of due for searching purposes
-      username: null,
+      user_id: null,
       billsList_filtered: [],
       bills_name: null,
     };
   },
   mounted() {
     this.getAlldues();
-    this.username = this.$route.params.username;
-    //console.log(this.billsList)
+    this.user_id = this.$route.params.user_id;
+    //console.log(this.user_id)
 
   },
   methods: {
     async getAlldues() {
-      this.billsList = await Due.getAllDueLists(this.$route.params.username);
+      this.billsList = await Due.getAllDueLists(this.$route.params.user_id);
       this.billList_Orig = this.billsList; //save the value to the billListoRIG for search purpose
     },
     async openAddListModal() {
@@ -71,7 +71,7 @@ export default {
         componentProps: {
           propsData: {
             timeStamp: new Date(),
-            username: this.username,
+            user_id: this.user_id,
           },
         },
       });

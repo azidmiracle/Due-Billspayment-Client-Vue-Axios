@@ -5,7 +5,7 @@ import Ionic from "@ionic/vue";
 import "@ionic/core/css/core.css";
 import "@ionic/core/css/ionic.bundle.css";
 
-import { home, menu, add, close, arrowForward,arrowBack,create,checkmark,card,calendar,stats} from "ionicons/icons";
+import { home, menu, add, close, arrowForward,arrowBack,create,checkmark,card,calendar,stats,power,settings} from "ionicons/icons";
 import { addIcons } from "ionicons";
 addIcons({
   "ios-home": home.ios,
@@ -29,8 +29,11 @@ addIcons({
   "md-calendar": calendar.md,
   "ios-calendar": calendar.ios,
   "md-stats": stats.md,
-  "ios-stats": stats.ios
-  
+  "ios-stats": stats.ios,
+  "md-power": power.md,
+  "ios-power": power.ios,
+  "md-settings": settings.md,
+  "ios-settings": settings.ios
 });
 
 Vue.use(Ionic);

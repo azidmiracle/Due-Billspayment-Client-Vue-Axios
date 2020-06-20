@@ -12,13 +12,16 @@ class User {
     this.country = country;
   }
 
-  static getUser(username) {
+  static getUser(username,password) {
 
     return new Promise((resolve, reject) => {
       try {
-        axios.get(`${userURL}${username}`).then((res) => {
-          const data = res.data;
-         // console.log(data)
+        axios.get(`${userURL}${username},${password}`).then((res) => {
+          let data = res.data;
+          if (data==null){
+            data="0"
+          }
+         //console.log(data)
           resolve(data);
         });
       } catch (err) {
@@ -27,10 +30,10 @@ class User {
     });
   }
 
+
   //create user
   static insertUser(users) {
     return axios.post(userURL, {
-      id: users["id"],
       username: users["username"],
       password: users["password"],
       mobileNumber: users["mobileNumber"],

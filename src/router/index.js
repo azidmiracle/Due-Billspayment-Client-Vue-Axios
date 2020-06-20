@@ -7,10 +7,11 @@ Vue.use(IonicVueRouter);
 const routes = [
   {
     path:"/signIn",
+    name:"signIn",
     component: () => import("@/views/LogIn.vue"),
   },
   {
-    path: "/:username",
+    path: "/:user_id",
     component: () => import("@/components/TabRoot.vue"),
     children: [
       {
@@ -29,6 +30,11 @@ const routes = [
         path: "History",
         name: "History",
         component: () => import("@/views/History.vue")
+      },
+      {
+        path: "Settings",
+        name: "Settings",
+        component: () => import("@/views/Settings.vue")
       }
     
     ],

@@ -40,13 +40,11 @@
             </ion-select>
           </ion-item>
         </ion-list>
-
-
-
         <ion-item>
-          <ion-label position="stacked">Scheduled Day e.g. 20</ion-label>
+          <ion-label position="stacked">Scheduled Day e.g. 20 (Min 1; Max 31) </ion-label>
           <ion-input
             type="number"
+            min="1" max="31"
             :value="scheduled_day"
             @input="scheduled_day = $event.target.value"
             clear-input="true"
@@ -91,7 +89,7 @@ export default {
   name: "addListModal",
   props: {
     title: { type: String, default: "Super Modal" },
-    username: String
+    user_id: String
   },
   data() {
     return {
@@ -113,7 +111,7 @@ export default {
       if (isConfirmed) {
         //create new instance of user
         this.newBill = new Due(
-          this.username,
+          this.user_id,
           this.bills_name,
           this.benefeciary_name,
           this.frequency,
@@ -130,7 +128,9 @@ export default {
       this.$ionic.modalController.dismiss(this.newBill);
     }
   },
-  mounted() {}
+  mounted() {
+    //console.log(this.user_id)
+  }
 };
 </script>
 

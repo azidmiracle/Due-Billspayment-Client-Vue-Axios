@@ -62,7 +62,7 @@ export default {
   name: "HistoryList",
   props: {
     historyLists: Array,
-    username: String,
+    user_id: String,
   },
   data() {
     return {

@@ -5,7 +5,7 @@ let DueURL = "http://localhost:5000/dueLists";
 //new instance of a Due
 class Due {
   constructor(
-    username,
+    user_id,
     bills_name,
     benefeciary_name,
     frequency,
@@ -13,7 +13,7 @@ class Due {
     amount,
     currency
   ) {
-    this.username=username;
+    this.user_id=user_id;
     this.bills_name = bills_name;
     this.benefeciary_name = benefeciary_name;
     this.frequency = frequency;
@@ -23,10 +23,10 @@ class Due {
     this.txn=[]
   }
 
-  static getAllDueLists(username) {
+  static getAllDueLists(user_id) {
     return new Promise((resolve, reject) => {
       try {
-        axios.get(`${DueURL}/${username}`).then((res) => {
+        axios.get(`${DueURL}/${user_id}`).then((res) => {
           const data = res.data;
           //console.log(data)
           resolve(data);
@@ -40,7 +40,7 @@ class Due {
   //create Due
   static insertDue(Dues) {  
     return axios.post(DueURL, {
-      username: Dues["username"],
+      user_id: Dues["user_id"],
       bills_name: Dues["bills_name"],
       benefeciary_name: Dues["benefeciary_name"],
       frequency: Dues["frequency"],

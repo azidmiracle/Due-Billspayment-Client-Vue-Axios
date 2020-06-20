@@ -115,6 +115,7 @@ export default {
     getLastPayment: function() {
       return function(lastPayment) {
         // sort by value
+        //console.log(lastPayment)
         let allDateTxn=[];//create array for date paid only
         lastPayment.forEach(element => {
             allDateTxn.push(new Date(element.date_paid))//push the dates to this array

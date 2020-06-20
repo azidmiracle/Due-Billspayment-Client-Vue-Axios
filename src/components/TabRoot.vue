@@ -8,6 +8,9 @@
     <ion-tab tab="home" :routes="['home','due-name']" :to="{name:'home'}">
       <Home/>
     </ion-tab>
+     <ion-tab tab="settings" :routes="['Settings']" :to="{name:'Settings'}">
+      <Settings/>
+    </ion-tab>
     <!-- Use v-slot:bottom with Vue ^2.6.0 -->
     <template slot="bottom">
       <ion-tab-bar>
@@ -20,6 +23,10 @@
           <ion-icon name="home"></ion-icon>
           <ion-label>Home</ion-label>
         </ion-tab-button>
+        <ion-tab-button tab="settings">
+          <ion-icon name="settings"></ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-tab-button>
       </ion-tab-bar>
     </template>
   </ion-tabs>
@@ -30,12 +37,14 @@
 // @ is an alias to /src
 import History from "@/views/History.vue";
 import Home from "@/views/Home.vue";
+import Settings from "@/views/Settings.vue";
 import { TxnHistory } from "@/modules/TxnHistoryService.js";
 export default {
   name: "TabRoot",
   components: {
     Home,
-    History
+    History,
+    Settings
   },
   data(){
     return {
@@ -50,7 +59,7 @@ export default {
      this.getAllTxns()
     },
     async getAllTxns() {
-      this.historyLists = await TxnHistory.getAllTransactions(this.$route.params.username);
+      this.historyLists = await TxnHistory.getAllTransactions(this.$route.params.user_id);
       
     }
   }

@@ -1,9 +1,9 @@
 <template>
   <div class="ion-page">
-<ion-tabs>
+<ion-tabs >
     <!-- Get matched routes with a helper method -->
     <ion-tab tab="History" :routes="['History']" :to="{name:'History'}">
-      <History/>
+      <History :historyLists="historyLists"/>
     </ion-tab>
     <ion-tab tab="home" :routes="['home','due-name']" :to="{name:'home'}">
       <Home/>
@@ -12,7 +12,7 @@
     <template slot="bottom">
       <ion-tab-bar>
         <!-- Provide custom click handler -->
-         <ion-tab-button tab="History">
+         <ion-tab-button tab="History" @click="ionTabsWillChange">
           <ion-icon name="stats"></ion-icon>
           <ion-label>History</ion-label>
         </ion-tab-button>
@@ -30,11 +30,29 @@
 // @ is an alias to /src
 import History from "@/views/History.vue";
 import Home from "@/views/Home.vue";
+import { TxnHistory } from "@/modules/TxnHistoryService.js";
 export default {
   name: "TabRoot",
   components: {
     Home,
     History
+  },
+  data(){
+    return {
+         historyLists:[]
+    }
+  },
+  created(){
+        this.getAllTxns()
+    },
+  methods:{
+    ionTabsWillChange(){
+     this.getAllTxns()
+    },
+    async getAllTxns() {
+      this.historyLists = await TxnHistory.getAllTransactions(this.$route.params.username);
+      
+    }
   }
 };
 </script>

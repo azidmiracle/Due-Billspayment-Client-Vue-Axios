@@ -5,7 +5,7 @@
       v-bind:item="due"
       v-bind:index="index"
       v-bind:key="due._id"
-      color="purple"
+      color="dark"
     >
       <ion-toolbar color="light">
         <ion-title slot="start" class="ion-text-uppercase">
@@ -33,12 +33,12 @@
         </ion-label>
         <br />
         <ion-label>
-          <b>Last Payment:</b>
+          <b>Last Payment Date:</b>
           {{getLastPayment(due.txn[0])[1] }}
         </ion-label>
         <br />
         <ion-label>
-          <b>Next Payment:</b>
+          <b>Next Payment Date:</b>
           {{getNextPaymentDate(due)}}
         </ion-label>
         <br />
@@ -125,7 +125,7 @@ export default {
         });
         allDateTxn.sort(function(a, b) {
           return b - a; //sort from the latest date
-        });
+        })
 
         let lastPyntDate = new Date(allDateTxn[0])//allDateTxn[0];
         let formatted_dateLP =
@@ -138,7 +138,7 @@ export default {
            formatted_dateLP="-"
          }
          let dateArr=[allDateTxn[0],formatted_dateLP] 
-        return dateArr//MyDate.formatDate(lastPyntDate); //return the first value in the array
+        return dateArr //return the first value in the array
       };
     },
     getNextPaymentDate: function() {

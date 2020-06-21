@@ -9,7 +9,9 @@
           v-bind:index="index"
           v-bind:key="list._id"
         >
-          <ion-button :value="list['_id']" @click="getMonthID(index)">
+          <ion-button :value="index" @click="getMonthID(index)" 
+           :color ="selectedMonthClass(index)"
+           class="btn-hover">
             <ion-label>
               {{
                 getMonthName(list["_id"]["month"]) + " " + list["_id"]["year"]
@@ -29,7 +31,7 @@
         v-bind:key="txn._id"
       >
         <ion-card-content>
-          <ion-label>{{ txn["txn"]["date_paid"] }}</ion-label
+          <ion-label>{{ getFormattedDate (txn["txn"]["date_paid"] )}}</ion-label
           ><br />
           <ion-label>{{
             txn["bills_name"].toUpperCase() +
@@ -46,7 +48,7 @@
           }}</ion-label>
           <br />
           <ion-label item-right text-right>{{
-            txn["txn"]["amount"] + " " + txn["txn"]["currency"].toUpperCase()
+             txn["txn"]["currency"].toUpperCase()  + " " + txn["txn"]["amount"] 
           }}</ion-label>
         </ion-card-content>
       </ion-card>
@@ -67,24 +69,54 @@ export default {
   data() {
     return {
       selectedIndex: 0,
+
     };
   },
   methods: {
     getMonthID(index) {
       this.selectedIndex = index;
+      
     },
+    selectedMonthClass(index){
+      let selectedClass=""
+       if(this.selectedIndex===index){
+
+            selectedClass='secondary'
+
+            //console.log(index)
+       }  else{
+           selectedClass='light'
+       }
+       
+       return selectedClass
+    }
   },
   computed: {
     //get the month
     getMonthName: function() {
       return (monthNum) => MyDate.getMonthName(monthNum - 1);
     },
+       getFormattedDate: function() {
+      return function(date) {
+          let newDate = new Date(date)
+          ;
+          return MyDate.formatDate(newDate);
+        
+      };
+    }
   },
   mounted() {
-    //let todayDate = new Date(); //get the date today
-    //let prevMonth = new Date(todayDate.setMonth(todayDate.getMonth() - 6)); //get the date previous 12 months
+    
+    //console.log(this.historyLists)
+    
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+
+.selected{
+    background-color: aquamarine;
+}
+
+</style>

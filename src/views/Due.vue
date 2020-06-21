@@ -56,6 +56,7 @@
             clear-input="true"
             readonly
             required
+            min="1" max="31"
           ></ion-input>
         </ion-item>
         <ion-item>

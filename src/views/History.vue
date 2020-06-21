@@ -1,17 +1,16 @@
 <template>
     <div class="ion-page">
     <ion-content class="ion-padding">
-  <HistoryLists
+     <HistoryLists v-if="historyLists.length>0"
         :historyLists="historyLists"
-        :user_id="user_id"
         />
+      <ion-label v-else>
+        No records found</ion-label>  
     </ion-content> 
     </div> 
 </template>
 
 <script>
-//import { TxnHistory } from "@/modules/TxnHistoryService.js";
-//import historyChart from "@/components/historyChart.vue";
 import HistoryLists from "@/components/HistoryLists.vue";
 export default {
     name:'History',
@@ -19,27 +18,14 @@ export default {
     historyLists: Array,
     
   },
+  data(){
+    
+  },
     components:{
        //historyChart,
         HistoryLists
     },
-    data(){
-        return{
-           //historyLists:null,
-           user_id:null
-        }
-    },
-    created(){
-        //this.getAllTxns()
-        //this.user_id = this.$route.params.user_id;
-        //console.log (this.$route.params.user_id)
-    },
-    methods:{
-    //async getAllTxns() {
-      //this.historyLists = await TxnHistory.getAllTransactions(this.$route.params.user_id);
-      
-    //}
-    }
+
 
 }
 </script>

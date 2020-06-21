@@ -3,7 +3,7 @@
 <ion-tabs >
     <!-- Get matched routes with a helper method -->
     <ion-tab tab="History" :routes="['History']" :to="{name:'History'}">
-      <History :historyLists="historyLists"/>
+      <History :historyLists="historyLists" :histLength="histLength"/>
     </ion-tab>
     <ion-tab tab="home" :routes="['home','due-name']" :to="{name:'home'}">
       <Home/>
@@ -48,7 +48,8 @@ export default {
   },
   data(){
     return {
-         historyLists:[]
+         historyLists:[],
+         
     }
   },
   created(){
@@ -60,6 +61,7 @@ export default {
     },
     async getAllTxns() {
       this.historyLists = await TxnHistory.getAllTransactions(this.$route.params.user_id);
+      //console.log( this.histLength)
       
     }
   }

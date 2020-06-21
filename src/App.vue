@@ -30,6 +30,13 @@ export default {
   --ion-color-purple-shade: #5ca56c;
   --ion-color-purple-tint: #726a95;
 
+    --ion-color-darkBlue: #00003f;
+  --ion-color-darkBlue-rgb: 0, 0, 83;
+  --ion-color-darkBlue-contrast: #000020 ;
+  --ion-color-darkBlue-contrast-rgb: 0, 0, 32;
+  --ion-color-darkBlue-shade: #000082;
+  --ion-color-darkBlue-tint: #a9a9ff;
+
 }
 
 .ion-color-lightGreen {
@@ -41,6 +48,15 @@ export default {
   --ion-color-tint: var(--ion-color-new-tint);
 }
 
+.ion-color-darkBlue {
+  --ion-color-base: var(--ion-color-darkBlue);
+  --ion-color-base-rgb: var(--ion-color-darkBlue-rgb);
+  --ion-color-contrast: var(--ion-color-darkBlue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-darkBlue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-darkBlue-shade);
+  --ion-color-tint: var(--ion-color-darkBlue-tint);
+}
+
 .ion-color-purple {
   --ion-color-base: var(--ion-color-purple);
   --ion-color-base-rgb: var(--ion-color-purple-rgb);
@@ -50,13 +66,16 @@ export default {
   --ion-color-tint: var(--ion-color-purple-tint);
 }
 
-
 .borderRad-20{
     --border-radius:20px
 }
 
 .borderRad-40{
     --border-radius:40px
+}
+
+.btn-hover{
+  --button-color-hover:var(--ion-color-purple)!important;
 }
 
 </style>

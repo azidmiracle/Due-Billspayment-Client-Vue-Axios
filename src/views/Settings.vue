@@ -18,17 +18,30 @@
         </ion-row>
       </ion-col>
     </ion-row>
-    <br>
-    <br>
+    <br />
+    <br />
     <ion-row>
       <ion-label>
-          <b>USER NAME: </b> {{user.username}}
-      </ion-label>
+        <b>USER NAME:</b>
+        <ion-input readonly> {{ user.username }}</ion-input></ion-label
+      >
+
+      <br />
     </ion-row>
-    <br>
+
+    <br />
     <ion-row>
       <ion-label>
-          <b>PASSWORD: </b> {{user.password}}
+        <b>PASSWORD:</b>
+        <ion-input :type="pwdType" :value="user.password"> </ion-input>
+        <ion-button v-if="isPwdShown===false" color="warning" class="borderRad-20" size="small" @click="showPwd">
+            <ion-icon name="eye" style="margin: 16px"></ion-icon>
+            <ion-label> Show Password</ion-label>
+          </ion-button>
+       <ion-button v-else color="warning" class="borderRad-20" size="small" @click="hidePwd">
+            <ion-icon name="eye-off" style="margin: 16px"></ion-icon>
+            <ion-label> Hide Password</ion-label>
+          </ion-button>
       </ion-label>
     </ion-row>
   </div>
@@ -42,22 +55,30 @@ export default {
   data() {
     return {
       user: null,
+      pwdType:"password",
+      isPwdShown:false
     };
   },
   methods: {
     async getUserDetails() {
       this.user = await User.getUserDetails(this.$route.params.user_id);
     },
-     logOut() {
-      
-        this.$router.push({
-          name: "signIn"
-        }); 
+    logOut() {
+      this.$router.push({
+        name: "signIn",
+      });
     },
+    showPwd(){
+       this.pwdType="text"
+       this.isPwdShown=true
+    },
+    hidePwd(){
+       this.pwdType="password"
+       this.isPwdShown=false
+    }
   },
   mounted() {
     this.getUserDetails();
   },
 };
 </script>
-

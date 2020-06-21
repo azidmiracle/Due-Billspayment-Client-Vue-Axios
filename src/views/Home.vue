@@ -84,7 +84,7 @@ export default {
     },
     // Triggered when `childToParent` event is emitted by the child.
     onDeleteList(value) {
-      let isDeleted = confirm("Do you want to delete?");
+      let isDeleted = confirm("All transaction related to this bills name will be deleted. \n Do you want to delete?");
       if (isDeleted) {
         Due.deleteDue(value).then(() => this.getAlldues());
       }

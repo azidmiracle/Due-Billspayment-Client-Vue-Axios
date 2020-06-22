@@ -10,7 +10,7 @@
           @input="bills_name = $event.target.value"
           @ionBlur="searchDue(bills_name)"
           show-cancel-button="always"
-          @ionCancel="loadOrigValue"
+          @ionCancel="loadOrigValue" 
         ></ion-searchbar>
       </ion-toolbar>
     </ion-header>
@@ -27,7 +27,7 @@
         slot="fixed"
         @click="openAddListModal"
       >
-        <ion-fab-button color="secondary">
+        <ion-fab-button color="warning">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
       </ion-fab>
@@ -38,12 +38,11 @@
 <script>
 import { Due } from "@/modules/DueListService.js";
 import addListModal from "./addListModal.vue";
-// @ is an alias to /src
 import DueList from "@/components/DueList.vue";
 export default {
   name: "Home",
   components: {
-    DueList,
+    DueList,//child component is DueList.vue
   },
   data() {
     return {
@@ -55,10 +54,10 @@ export default {
     };
   },
   mounted() {
+    //when mounted, get all the dues from the server
     this.getAlldues();
+    //get the user id from the route params and save it in this user_id variable
     this.user_id = this.$route.params.user_id;
-    //console.log(this.user_id)
-
   },
   methods: {
     async getAlldues() {
@@ -66,12 +65,12 @@ export default {
       this.billList_Orig = this.billsList; //save the value to the billListoRIG for search purpose
     },
     async openAddListModal() {
+      //this will open the addListModal.vue modal
       let modal = await this.$ionic.modalController.create({
         component: addListModal,
         componentProps: {
           propsData: {
-            timeStamp: new Date(),
-            user_id: this.user_id,
+            user_id: this.user_id,//pass this data to the add addListModal.vue
           },
         },
       });
@@ -97,15 +96,16 @@ export default {
       this.billsList = this.billList_Orig; //put back the old value
     },
     searchDue(text) {
-      this.loadOrigValue();
+      this.loadOrigValue();//load the previous values
       this.billsList.forEach((element) => {
-        let regExSearch = new RegExp(text, "gi");
+        //search the text in the bills_name array
+        let regExSearch = new RegExp(text, "gi");//using regular expression g:global, i:not case sensitive
         let obj = element.bills_name.search(regExSearch);
-        if (obj >= 0) {
+        if (obj >= 0) {//if the bills name match, push the object to billsList_filtered array
           this.billsList_filtered.push(element);
         }
       });
-      this.billsList = this.billsList_filtered;
+      this.billsList = this.billsList_filtered;//pass the value of the billsList_filtered to billsList so it can display the data
       this.billsList_filtered = []; //clear the filtered arrays
     },
   },

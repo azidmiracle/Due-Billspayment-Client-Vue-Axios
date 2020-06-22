@@ -5,7 +5,7 @@
       v-bind:item="due"
       v-bind:index="index"
       v-bind:key="due._id"
-      color="dark"
+      color="success"
     >
       <ion-toolbar color="light">
         <ion-title slot="start" class="ion-text-uppercase">
@@ -34,12 +34,12 @@
         <br />
         <ion-label>
           <b>Last Payment Date:</b>
-          {{getLastPayment(due.txn[0])[1] }}
+          {{ getLastPayment(due.txn[0])[1] }}
         </ion-label>
         <br />
         <ion-label>
           <b>Next Payment Date:</b>
-          {{getNextPaymentDate(due)}}
+          {{ getNextPaymentDate(due) }}
         </ion-label>
         <br />
         <ion-item>
@@ -48,7 +48,7 @@
           </ion-label>
           <ion-button
             slot="end"
-            color="secondary"
+            color="success"
             :value="due.bills_name"
             @click="openDueModal(due.bills_name, due)"
           >
@@ -65,9 +65,8 @@ import Due from "../views/Due";
 export default {
   name: "DueList",
   props: {
-    msg: String,
-    billsList: Array,
-    username: String,
+    billsList: Array,//this prop is from the Home.vue
+    username: String,//this prop is from the Home.vue
   },
   data() {
     return {
@@ -78,13 +77,15 @@ export default {
     };
   },
   methods: {
-    deleteDue(key) {
+    deleteDue(key) {//delete the selected due by emitting the due id to the parent
       this.key = key;
       this.$emit("deleteList", this.key); //emit the key to the Home.vue parent
     },
-    updateDetails() {
+    updateDetails() {//update the details of the due lists
       this.$emit("updateList"); //emit the key to the Home.vue parent
     },
+
+    //this seeDetails method is not used since the routing does not work properly. So, i decided to use the modal
     seeDetails(bills_name, due) {
       this.$router.push({
         name: "due-name",
@@ -95,6 +96,7 @@ export default {
         },
       });
     },
+    //When the see details button is clicked, it will pop up the DUE.VUE view (saved in the view folder)
     async openDueModal(bills_name, due) {
       let modal = await this.$ionic.modalController.create({
         component: Due,
@@ -121,40 +123,44 @@ export default {
         //console.log(lastPayment)
         let allDateTxn = []; //create array for date paid only
         lastPayment.forEach((element) => {
-          allDateTxn.push(new Date(element.date_paid)); //push the dates to this array
+          allDateTxn.push(new Date(element.date_paid)); //push the dates to this allDateTxn array
         });
         allDateTxn.sort(function(a, b) {
           return b - a; //sort from the latest date
-        })
+        });
 
-        let lastPyntDate = new Date(allDateTxn[0])//allDateTxn[0];
+        let lastPyntDate = new Date(allDateTxn[0]); //get the first value in the array since that is the latest date
+
+        //format the date for display
         let formatted_dateLP =
           MyDate.getMonthNameComplete(lastPyntDate.getMonth()) +
           " " +
           lastPyntDate.getDate() +
           ", " +
           lastPyntDate.getFullYear();
-         if(allDateTxn[0]==null){
-           formatted_dateLP="-"
-         }
-         let dateArr=[allDateTxn[0],formatted_dateLP] 
-        return dateArr //return the first value in the array
+        if (allDateTxn[0] == null) {
+          formatted_dateLP = "-";
+        }
+        let dateArr = [allDateTxn[0], formatted_dateLP]; //create an array. the first index is not formatted, second index is formatted
+        return dateArr;
       };
     },
     getNextPaymentDate: function() {
       return function(due) {
-        let dt = this.getLastPayment(due.txn[0])[0];
+        let dt = this.getLastPayment(due.txn[0])[0]; //get the last payment
         if (dt != null) {
           //if there is a last payment done, calculate the next payment
           //get the frequency
           let addMonth = [1, 3, 6, 12]; //for monthly:add 1 month, quarterly: add 3 months etc....
+
+          //add the number of months to get the next payment date
           let newDate = new Date(
             dt.setMonth(dt.getMonth() + addMonth[due.frequency])
           );
 
-          return MyDate.formatDate(newDate);
-        } else {
-          //if there was no last payment done, just get the date this month...
+          return MyDate.formatDate(newDate);//format the date
+
+        } else {//if there was no last payment done, just get the date this month...         
           return (
             this.todayMonth + " " + due.scheduled_day + ", " + this.todayYear
           );
@@ -163,14 +169,15 @@ export default {
     },
     getFrequency: function() {
       let frequencyData = ["Monthly", "Quarterly", "Semi-annually", "Annually"];
-      return (index) => frequencyData[index];
+      return (index) => frequencyData[index];//0:monthly; 1:Quarterly etc...
     },
   },
-  created() {
+  created() {//once the compoent is created, it will get the current date. This value will be passed to the getNextPaymentDate function
+
     this.todayMonth = MyDate.getTodayMonth();
     this.todayYear = MyDate.getTodayYear();
   },
 };
 </script>
 
-<style></style>
+

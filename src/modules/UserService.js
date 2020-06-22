@@ -1,6 +1,13 @@
+/*
+USED IN THE LOGIN  PAGE
+THIS MODULE USED FOR THE LOGGING IN CLIENT SIDE USING AXIOS API
+TRANSACTION: VERIFY IF THE USERNAME AND PASSWORD EXISTS IN THE DATABASE
+*/
+
+
 import axios from "axios";
 
-let userURL = "http://localhost:5000/user/";
+let userURL = "https://due-lists.herokuapp.com/user/";
 
 //new instance of a user
 class User {
@@ -12,13 +19,13 @@ class User {
     this.country = country;
   }
 
+  //It will pass the username and password value to the server side route
   static getUser(username,password) {
-
     return new Promise((resolve, reject) => {
       try {
         axios.get(`${userURL}${username},${password}`).then((res) => {
           let data = res.data;
-          if (data==null){
+          if (data==null){//if the user does not exist it will return 0
             data="0"
           }
          //console.log(data)
@@ -29,8 +36,6 @@ class User {
       }
     });
   }
-
-
   //create user
   static insertUser(users) {
     return axios.post(userURL, {

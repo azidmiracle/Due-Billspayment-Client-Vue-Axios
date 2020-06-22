@@ -1,6 +1,14 @@
+
+/*
+USED IN THE HOME PAGE
+THIS MODULE USED FOR THE DUE TRANSACTION IN CLIENT SIDE USING AXIOS API
+TRANSATIONS SUCH AS ADD BILLS, UPDATE BILLS AND DELETE DUE 
+
+*/
+
 import axios from "axios";
 
-let DueURL = "http://localhost:5000/dueLists";
+let DueURL = "https://due-lists.herokuapp.com/dueLists";
 
 //new instance of a Due
 class Due {

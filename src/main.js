@@ -5,7 +5,24 @@ import Ionic from "@ionic/vue";
 import "@ionic/core/css/core.css";
 import "@ionic/core/css/ionic.bundle.css";
 
-import { home, menu, add, close, arrowForward,arrowBack,create,checkmark,card,calendar,stats,power,settings,eye,eyeOff} from "ionicons/icons";
+//these are the icons used in the application
+import {
+  home,
+  menu,
+  add,
+  close,
+  arrowForward,
+  arrowBack,
+  create,
+  checkmark,
+  card,
+  calendar,
+  stats,
+  power,
+  settings,
+  eye,
+  eyeOff,
+} from "ionicons/icons";
 import { addIcons } from "ionicons";
 addIcons({
   "ios-home": home.ios,
@@ -19,7 +36,7 @@ addIcons({
   "ios-arrow-forward": arrowForward.ios,
   "md-arrow-forward": arrowForward.md,
   "ios-arrow-back": arrowBack.ios,
-  "md-arrow-back": arrowBack.md, 
+  "md-arrow-back": arrowBack.md,
   "ios-create": create.ios,
   "md-create": create.md,
   "md-checkmark": checkmark.md,
@@ -33,13 +50,11 @@ addIcons({
   "md-power": power.md,
   "ios-power": power.ios,
   "md-settings": settings.md,
-  "ios-settings": settings.ios
-  ,
+  "ios-settings": settings.ios,
   "md-eye": eye.md,
-  "ios-eye": eye.ios
-  ,
+  "ios-eye": eye.ios,
   "md-eye-off": eyeOff.md,
-  "ios-eye-off": eyeOff.ios
+  "ios-eye-off": eyeOff.ios,
 });
 
 Vue.use(Ionic);

@@ -1,19 +1,38 @@
 <template>
   <div class="hello">
-    <ul v-for="(user,index) in users" v-bind:user="user" v-bind:index="index" v-bind:key="user.id">
+    <ul
+      v-for="(user, index) in users"
+      v-bind:user="user"
+      v-bind:index="index"
+      v-bind:key="user.id"
+    >
       <li>
-        <span>{{user.username}}</span>
+        <span>{{ user.username }}</span>
         <button v-on:click="deleteUser(user.id)">Delete</button>
       </li>
     </ul>
     <div class="create-user">
-      <input type="text" id="create-user" v-model="username" placeholder="Type user name" />
-      <input type="password" id="create-pwd" v-model="password" placeholder="Type password" />
+      <input
+        type="text"
+        id="create-user"
+        v-model="username"
+        placeholder="Type user name"
+      />
+      <input
+        type="password"
+        id="create-pwd"
+        v-model="password"
+        placeholder="Type password"
+      />
       <input type="password" id="create-pwd-1" placeholder="Verify password" />
-      <input type="number" id="create-ctry" v-model="mobileNo" placeholder="Type valid mobile number" />   
+      <input
+        type="number"
+        id="create-ctry"
+        v-model="mobileNo"
+        placeholder="Type valid mobile number"
+      />
       <button v-on:click="addUser()">Add</button>
     </div>
-    
   </div>
 </template>
 
@@ -24,17 +43,17 @@ import { User } from "@/modules/UserService.js";
 export default {
   name: "HelloWorld",
   props: {
-    msg: String
+    msg: String,
   },
   data() {
     return {
       myData: "",
       users: [],
       lastId: 0,
-      username:'',
-      password:'',
-      mobileNo:'',
-      Country:''
+      username: "",
+      password: "",
+      mobileNo: "",
+      Country: "",
     };
   },
   methods: {
@@ -61,11 +80,11 @@ export default {
       );
       User.insertUser(newUser);
       this.getAllUsers();
-    }
+    },
   },
   mounted() {
     this.getAllUsers();
-  }
+  },
 };
 </script>
 

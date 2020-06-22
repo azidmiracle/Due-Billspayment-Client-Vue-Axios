@@ -13,7 +13,9 @@
         <ion-item>
           <ion-label position="stacked">Bills name e.g. SSS</ion-label>
           <ion-input
+            class="ion-text-uppercase"
             clear-input="true"
+            clear-on-edit="true"
             required
             :value="bills_name"
             @input="bills_name = $event.target.value"
@@ -22,17 +24,22 @@
         <ion-item>
           <ion-label position="stacked">Beneficiary name.</ion-label>
           <ion-input
+            class="ion-text-uppercase"
             :value="benefeciary_name"
             @input="benefeciary_name = $event.target.value"
             clear-input="true"
             required
           ></ion-input>
         </ion-item>
- <ion-list>
+        <ion-list>
           <ion-item>
             <ion-label position="stacked">Frequency</ion-label>
-            <ion-select  :value="frequency"
-            @ionBlur="frequency = $event.target.value" ok-text="Okay" cancel-text="Dismiss">
+            <ion-select
+              :value="frequency"
+              @ionBlur="frequency = $event.target.value"
+              ok-text="Okay"
+              cancel-text="Dismiss"
+            >
               <ion-select-option value="0">Monthly</ion-select-option>
               <ion-select-option value="1">Quarterly</ion-select-option>
               <ion-select-option value="2">Semi-annually</ion-select-option>
@@ -41,10 +48,13 @@
           </ion-item>
         </ion-list>
         <ion-item>
-          <ion-label position="stacked">Scheduled Day e.g. 20 (Min 1; Max 31) </ion-label>
+          <ion-label position="stacked"
+            >Scheduled Day e.g. 20 (Min 1; Max 31)
+          </ion-label>
           <ion-input
             type="number"
-            min="1" max="31"
+            min="1"
+            max="31"
             :value="scheduled_day"
             @input="scheduled_day = $event.target.value"
             clear-input="true"
@@ -64,20 +74,36 @@
         <ion-list>
           <ion-item>
             <ion-label position="stacked">Currency</ion-label>
-            <ion-select  :value="currency"
-            @ionBlur="currency = $event.target.value" ok-text="Okay" cancel-text="Dismiss">
-              <ion-select-option value="sgd">Singapore Dollar</ion-select-option>
+            <ion-select
+              :value="currency"
+              @ionBlur="currency = $event.target.value"
+              ok-text="Okay"
+              cancel-text="Dismiss"
+            >
+              <ion-select-option value="sgd"
+                >Singapore Dollar</ion-select-option
+              >
               <ion-select-option value="php">Philippine Peso</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
+
+        <!--when bills_name, benefeciary_name, frequency, scheduled_day etc... are empty, it will disable the button -->
         <ion-button
-          :disabled="bills_name==null || benefeciary_name==null || frequency==null || scheduled_day==null || amount==null || currency==null"
+          :disabled="
+            bills_name == '' ||
+              benefeciary_name == '' ||
+              frequency == '' ||
+              scheduled_day == '' ||
+              amount == '' ||
+              currency == ''
+          "
           type="submit"
           fill="solid"
           expand="block"
           color="danger"
-        >Add</ion-button>
+          >Add</ion-button
+        >
       </form>
     </ion-content>
   </div>
@@ -88,24 +114,23 @@ import { Due } from "@/modules/DueListService.js";
 export default {
   name: "addListModal",
   props: {
-    title: { type: String, default: "Super Modal" },
-    user_id: String
+    user_id: String,//this props is from the Home.vue
   },
   data() {
     return {
       content: "Content",
       newBill: {},
-      bills_name: null,
-      benefeciary_name: null,
-      frequency: null,
-      scheduled_day: null,
-      amount: null,
-      currency:null,
+      bills_name: "",
+      benefeciary_name: "",
+      frequency: "",
+      scheduled_day: "",
+      amount: "",
+      currency: "",
     };
   },
   methods: {
     addDueList(e) {
-      e.preventDefault();
+      e.preventDefault(); //to prevent the page from reloading
       let isConfirmed = confirm("Do you want to enroll this bill?");
 
       if (isConfirmed) {
@@ -120,19 +145,13 @@ export default {
           this.currency,
           []
         );
-        Due.insertDue(this.newBill);
+        Due.insertDue(this.newBill); //insert the new instance by calling this method insertDue from DueListService.js
       }
     },
     //when the close button is close, it will dismiss the modal and pass the value of the new bill
     dismissModal() {
       this.$ionic.modalController.dismiss(this.newBill);
-    }
+    },
   },
-  mounted() {
-    //console.log(this.user_id)
-  }
 };
 </script>
-
-<style scoped>
-</style>

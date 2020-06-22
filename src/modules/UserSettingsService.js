@@ -1,8 +1,12 @@
+/*
+USED IN THE SETTINGS  PAGE
+THIS MODULE USED FOR THE USER DETAILS CLIENT SIDE USING AXIOS API
+TRANSACTION: VIEW THE USER USERNAME AND PASSWORD
+*/
+
 import axios from "axios";
+let userURL = "https://due-lists.herokuapp.com/settings/";
 
-let userURL = "http://localhost:5000/settings/";
-
-//new instance of a user
 class User {
 
   static getUserDetails(user_id) {

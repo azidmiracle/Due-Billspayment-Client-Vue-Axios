@@ -11,7 +11,7 @@
     <ion-content padding="true">
       <form @submit="addTxn">
         <ion-item>
-          <ion-label>{{bills_name}}</ion-label>
+          <ion-label>{{ bills_name }}</ion-label>
         </ion-item>
 
         <ion-item>
@@ -32,12 +32,18 @@
             required
           ></ion-input>
         </ion-item>
-         <ion-list>
+        <ion-list>
           <ion-item>
             <ion-label position="stacked">Currency</ion-label>
-            <ion-select  :value="currency"
-            @ionBlur="currency = $event.target.value" ok-text="Okay" cancel-text="Dismiss">
-              <ion-select-option value="sgd">Singapore Dollar</ion-select-option>
+            <ion-select
+              :value="currency"
+              @ionBlur="currency = $event.target.value"
+              ok-text="Okay"
+              cancel-text="Dismiss"
+            >
+              <ion-select-option value="sgd"
+                >Singapore Dollar</ion-select-option
+              >
               <ion-select-option value="php">Philippine Peso</ion-select-option>
             </ion-select>
           </ion-item>
@@ -45,6 +51,7 @@
         <ion-item>
           <ion-label position="stacked">Paid by</ion-label>
           <ion-input
+            class="ion-text-uppercase"
             type="text"
             :value="paid_by"
             @input="paid_by = $event.target.value"
@@ -55,6 +62,7 @@
         <ion-item>
           <ion-label position="stacked">Mode of Payment</ion-label>
           <ion-input
+            class="ion-text-uppercase"
             type="text"
             :value="mode_payment"
             @input="mode_payment = $event.target.value"
@@ -63,12 +71,13 @@
           ></ion-input>
         </ion-item>
         <ion-button
-          :disabled="amount==null || paid_by==null || mode_payment==null"
+          :disabled="amount == null || paid_by == null || mode_payment == null"
           type="submit"
           fill="solid"
           expand="block"
           color="danger"
-        >Add</ion-button>
+          >Add</ion-button
+        >
       </form>
     </ion-content>
   </div>
@@ -83,7 +92,7 @@ export default {
     _amount: String,
     due_id: Number,
     _currency: String,
-    user_id:String
+    user_id: String,
   },
   data() {
     return {
@@ -94,16 +103,18 @@ export default {
       mode_payment: null,
       amount: this._amount,
       currency: this._currency,
-      allTxns:[]
+      allTxns: [],
     };
   },
   methods: {
     addTxn(e) {
-      e.preventDefault();
-      let isConfirmed = confirm("Transaction cannot be deleted or edited anymore once added. \n Do you want to add this transaction?");
+      e.preventDefault(); //to prevent the page from reloading
+      let isConfirmed = confirm(
+        "Transaction cannot be deleted or edited anymore once added. \n Do you want to add this transaction?"
+      );
 
       if (isConfirmed) {
-        //create new instance of user
+        //create new instance of transaction
         this.newTxn = new Transaction(
           this.date_paid,
           this.amount,
@@ -111,22 +122,20 @@ export default {
           this.paid_by,
           this.mode_payment
         );
-        
+
         //push to the allTransactions
-        //this.allTxns.push( this.newTxn)
-        Transaction.insertTransaction(this.due_id,this.newTxn); //
+        Transaction.insertTransaction(this.due_id, this.newTxn); //
       }
     },
     //when the close button is close, it will dismiss the modal and pass the value of the new bill
     dismissModal() {
       this.$ionic.modalController.dismiss(this.newTxn);
-    }
+    },
   },
   async mounted() {
-    this.allTxns= await Transaction.getThisTxn(this.due_id)
-  }
+    this.allTxns = await Transaction.getThisTxn(this.due_id);
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

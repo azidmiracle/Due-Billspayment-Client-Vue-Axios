@@ -1,6 +1,12 @@
+/*
+USED IN THE HOME PAGE
+THIS MODULE USED FOR THE TRANSACTION IN CLIENT SIDE USING AXIOS API
+TRANSACTION: ADD TRANSACTION
+*/
+
 import axios from "axios";
 
-let txnURL = "http://localhost:5000/dueLists/txn";
+let txnURL = "https://due-lists.herokuapp.com/dueLists/txn";
 //new instance of a Due
 class Transaction {
   constructor(date_paid, amount,currency,paid_by, mode_payment) {

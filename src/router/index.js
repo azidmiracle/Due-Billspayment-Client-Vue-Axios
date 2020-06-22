@@ -7,7 +7,6 @@ Vue.use(IonicVueRouter);
 const routes = [
   {
     path:"/signIn",
-    name:"signIn",
     component: () => import("@/views/LogIn.vue"),
   },
   {
@@ -41,12 +40,13 @@ const routes = [
   },
 
   {
-    path:"/",redirect:"/signIn"
+    path:"/",
+    name:"signIn",
+    redirect:"/signIn"
   }
 ];
 
 const router = new IonicVueRouter({
-  //const router = new VueRouter({
   mode: "history",
   base: "/",
   routes,

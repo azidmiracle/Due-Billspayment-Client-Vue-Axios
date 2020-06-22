@@ -1,35 +1,35 @@
 <template>
   <div class="ion-page">
-<ion-tabs >
-    <!-- Get matched routes with a helper method -->
-    <ion-tab tab="History" :routes="['History']" :to="{name:'History'}">
-      <History :historyLists="historyLists" :histLength="histLength"/>
-    </ion-tab>
-    <ion-tab tab="home" :routes="['home','due-name']" :to="{name:'home'}">
-      <Home/>
-    </ion-tab>
-     <ion-tab tab="settings" :routes="['Settings']" :to="{name:'Settings'}">
-      <Settings/>
-    </ion-tab>
-    <!-- Use v-slot:bottom with Vue ^2.6.0 -->
-    <template slot="bottom">
-      <ion-tab-bar>
-        <!-- Provide custom click handler -->
-         <ion-tab-button tab="History" @click="ionTabsWillChange">
-          <ion-icon name="stats"></ion-icon>
-          <ion-label>History</ion-label>
-        </ion-tab-button>
-        <ion-tab-button tab="home">
-          <ion-icon name="home"></ion-icon>
-          <ion-label>Home</ion-label>
-        </ion-tab-button>
-        <ion-tab-button tab="settings">
-          <ion-icon name="settings"></ion-icon>
-          <ion-label>Settings</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </template>
-  </ion-tabs>
+    <ion-tabs>
+      <!-- Get matched routes with a helper method -->
+      <ion-tab tab="History" :routes="['History']" :to="{ name: 'History' }">
+        <History :historyLists="historyLists" :histLength="histLength" />
+      </ion-tab>
+      <ion-tab tab="home" :routes="['home', 'due-name']" :to="{ name: 'home' }">
+        <Home />
+      </ion-tab>
+      <ion-tab tab="settings" :routes="['Settings']" :to="{ name: 'Settings' }">
+        <Settings />
+      </ion-tab>
+      <!-- Use v-slot:bottom with Vue ^2.6.0 -->
+      <template slot="bottom">
+        <ion-tab-bar>
+          <!-- Provide custom click handler -->
+          <ion-tab-button tab="History" @click="ionTabsWillChange">
+            <ion-icon name="stats"></ion-icon>
+            <ion-label>History</ion-label>
+          </ion-tab-button>
+          <ion-tab-button tab="home">
+            <ion-icon name="home"></ion-icon>
+            <ion-label>Home</ion-label>
+          </ion-tab-button>
+          <ion-tab-button tab="settings">
+            <ion-icon name="settings"></ion-icon>
+            <ion-label>Settings</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </template>
+    </ion-tabs>
   </div>
 </template>
 
@@ -44,26 +44,26 @@ export default {
   components: {
     Home,
     History,
-    Settings
+    Settings,
   },
-  data(){
+  data() {
     return {
-         historyLists:[],
-         
-    }
+      historyLists: [],
+    };
   },
-  created(){
-        this.getAllTxns()
-    },
-  methods:{
-    ionTabsWillChange(){
-     this.getAllTxns()
+  created() {
+    this.getAllTxns();
+  },
+  methods: {
+    ionTabsWillChange() {//everytime the hsitory tab is clicked it will be reloaded.
+      this.getAllTxns();
     },
     async getAllTxns() {
-      this.historyLists = await TxnHistory.getAllTransactions(this.$route.params.user_id);
-      //console.log( this.histLength)
+      this.historyLists = await TxnHistory.getAllTransactions(
+        this.$route.params.user_id
+      );
       
-    }
-  }
+    },
+  },
 };
 </script>

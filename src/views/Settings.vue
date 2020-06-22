@@ -34,14 +34,29 @@
       <ion-label>
         <b>PASSWORD:</b>
         <ion-input :type="pwdType" :value="user.password"> </ion-input>
-        <ion-button v-if="isPwdShown===false" color="warning" class="borderRad-20" size="small" @click="showPwd">
-            <ion-icon name="eye" style="margin: 16px"></ion-icon>
-            <ion-label> Show Password</ion-label>
-          </ion-button>
-       <ion-button v-else color="warning" class="borderRad-20" size="small" @click="hidePwd">
-            <ion-icon name="eye-off" style="margin: 16px"></ion-icon>
-            <ion-label> Hide Password</ion-label>
-          </ion-button>
+
+        <!-- When the isPwdShown is false, show this button -->
+        <ion-button
+          v-if="isPwdShown === false"
+          color="warning"
+          class="borderRad-20"
+          size="small"
+          @click="showPwd"
+        >
+          <ion-icon name="eye" style="margin: 16px"></ion-icon>
+          <ion-label> Show Password</ion-label>
+        </ion-button>
+        <!-- When the isPwdShown is true, show this button -->
+        <ion-button
+          v-else
+          color="warning"
+          class="borderRad-20"
+          size="small"
+          @click="hidePwd"
+        >
+          <ion-icon name="eye-off" style="margin: 16px"></ion-icon>
+          <ion-label> Hide Password</ion-label>
+        </ion-button>
       </ion-label>
     </ion-row>
   </div>
@@ -55,30 +70,30 @@ export default {
   data() {
     return {
       user: null,
-      pwdType:"password",
-      isPwdShown:false
+
+      //--this is used in showing/hiding the show/hide password button.
+      pwdType: "password",// default value set to password ex. ******
+      isPwdShown: false,//set the value to false. meaning, hide password
     };
   },
   methods: {
     async getUserDetails() {
-      this.user = await User.getUserDetails(this.$route.params.user_id);
+      this.user = await User.getUserDetails(this.$route.params.user_id);//call the method getUserDetails saved in UserSettingsService.js
     },
-    logOut() {
-      this.$router.push({
-        name: "signIn",
-      });
+    logOut() {//when the log-out button is clicked, redirect to signIn page
+      window.location.href = "/signIn";
     },
-    showPwd(){
-       this.pwdType="text"
-       this.isPwdShown=true
+    showPwd() {//when the show password is clicked
+      this.pwdType = "text";//set the type from password to text
+      this.isPwdShown = true;
     },
-    hidePwd(){
-       this.pwdType="password"
-       this.isPwdShown=false
-    }
+    hidePwd() {//when the hide password is clicked
+      this.pwdType = "password";//set the type from text  to password
+      this.isPwdShown = false;
+    },
   },
   mounted() {
-    this.getUserDetails();
+    this.getUserDetails();//when the page is mounted, load the user details
   },
 };
 </script>

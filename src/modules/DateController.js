@@ -13,27 +13,27 @@ month[10] = "November";
 month[11] = "December";
 
 class MyDate {
-  static getTodayMonth() {
+  static getTodayMonth() {//get the month today and return the month name example June
     let dateToday = new Date();
     let monthName = month[dateToday.getMonth()];
     return monthName;
   }
 
-  static getTodayYear(){
+  static getTodayYear(){//get the full year of todays date
     let dateToday = new Date();
     let year = dateToday.getFullYear();
 
     return year
   }
-  static getMonthName(monthNum) {   
+  static getMonthName(monthNum) {   //get the month name but up to 3 characters only. for example for june, it will return Jun
     return month[monthNum].slice(0, 3);
   }
 
-  static getMonthNameComplete(monthNum) {   
+  static getMonthNameComplete(monthNum) {  //return the complete month name 
     return month[monthNum];
   }
 
-  static formatDate(date){
+  static formatDate(date){//format the date example June 1, 2020
     let formattedDate=this.getMonthNameComplete(date.getMonth()) +
     " " +
     date.getDate() +
@@ -44,4 +44,4 @@ class MyDate {
 
 }
 
-export  {MyDate};
+export  {MyDate};//export the date

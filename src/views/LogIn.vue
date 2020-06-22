@@ -7,7 +7,6 @@
           style="border-radius: 50%;"
         />
       </ion-row>
-
       <ion-row center>
         <ion-col text-center size-md="5" size-lg="5" size-xs="12">
           <div class="ion-padding">
@@ -58,7 +57,6 @@ export default {
     return {
       username: null,
       password: null,
-      isExisting: false,
       User: {},
     };
   },
@@ -66,15 +64,15 @@ export default {
     async logIn() {
       //check if the username and password exists in users database
       this.User = await User.getUser(this.username, this.password);
-      //let userPwd= this.User["password"]
+      //If username and password matches the value in the user collection, redirect to log-in page
       if (this.User != 0) {
         this.$router.push({
           name: "home",
           params: {
-            user_id: this.User["_id"],
+            user_id: this.User["_id"],//call the home route. Rooute is saved in src/router/index.js
           },
         });
-      } else {
+      } else {//else, display the alert
         alert("Username does not exist.");
       }
     },

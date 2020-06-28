@@ -7,7 +7,10 @@ TRANSACTION: VIEW TRANSACTION HISTORY
 
 import axios from "axios";
 
-let histURL = "https://due-lists.herokuapp.com/history";
+
+import baseUrl from "@/modules/BaseUrl.js";
+
+let histURL = baseUrl.baseUrl+"history";
 //new instance of a Due
 class TxnHistory {
 

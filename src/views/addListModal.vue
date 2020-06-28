@@ -115,6 +115,7 @@ export default {
   name: "addListModal",
   props: {
     user_id: String,//this props is from the Home.vue
+    timeout: { type: Number, default: 1000 },
   },
   data() {
     return {
@@ -134,7 +135,7 @@ export default {
       let isConfirmed = confirm("Do you want to enroll this bill?");
 
       if (isConfirmed) {
-        //create new instance of user
+        //create new instance of bill
         this.newBill = new Due(
           this.user_id,
           this.bills_name,
@@ -146,11 +147,26 @@ export default {
           []
         );
         Due.insertDue(this.newBill); //insert the new instance by calling this method insertDue from DueListService.js
+        this.loading()
       }
     },
     //when the close button is close, it will dismiss the modal and pass the value of the new bill
     dismissModal() {
       this.$ionic.modalController.dismiss(this.newBill);
+    },
+    loading() {
+      return this.$ionic.loadingController
+        .create({
+          cssClass: 'my-custom-class',
+          message: 'Adding Bill...',
+          duration: this.timeout,
+        })
+        .then(loading => {
+          setTimeout(function() {
+            loading.dismiss()
+          }, this.timeout)
+          return loading.present()
+        })
     },
   },
 };

@@ -5,7 +5,9 @@ TRANSACTION: VIEW THE USER USERNAME AND PASSWORD
 */
 
 import axios from "axios";
-let userURL = "https://due-lists.herokuapp.com/settings/";
+
+import baseUrl from "@/modules/BaseUrl.js";
+let userURL =  baseUrl.baseUrl+"settings/";
 
 class User {
 

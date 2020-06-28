@@ -135,9 +135,10 @@ import addTransaction from "@/views/addTransaction.vue";
 export default {
   name: "Due",
   props: {
-    duename: String,//props from parent DueLists
-    duenameDetails: Object,//props from parent DueLists
-    username: String,//props from parent DueLists
+    duename: String, //props from parent DueLists
+    duenameDetails: Object, //props from parent DueLists
+    username: String, //props from parent DueLists
+    timeout: { type: Number, default: 1000 },
   },
   data() {
     return {
@@ -153,11 +154,13 @@ export default {
     };
   },
   methods: {
-    editDues() {//when the edit button is clicked, make the ion-input editable
+    editDues() {
+      //when the edit button is clicked, make the ion-input editable
       this.isEdit = true;
       //make all textboxes editable
-      let input_tags = document.querySelectorAll("ion-input");//get all the element with a tagname of ion-input
-      for (let i = 0; i < input_tags.length; ++i) {//for each input element, make it editable
+      let input_tags = document.querySelectorAll("ion-input"); //get all the element with a tagname of ion-input
+      for (let i = 0; i < input_tags.length; ++i) {
+        //for each input element, make it editable
         input_tags[i].readonly = false;
       }
     },
@@ -175,9 +178,23 @@ export default {
           currency: this.currency,
         };
         Due.updateDue(this.id, this.updatedDue);
+        this.loadingUpdate()
       }
     },
-
+    loadingUpdate() {
+      return this.$ionic.loadingController
+        .create({
+          cssClass: "my-custom-class",
+          message: "Updating Bill...",
+          duration: this.timeout,
+        })
+        .then((loading) => {
+          setTimeout(function() {
+            loading.dismiss();
+          }, this.timeout);
+          return loading.present();
+        });
+    },
     async openAddTxnModal() {
       let modal = await this.$ionic.modalController.create({
         component: addTransaction,
@@ -216,7 +233,6 @@ export default {
 };
 </script>
 <style>
-
 /*this buttons style is for the clear and update button
 because it uses the conventional button not the ion-button*/
 .btn {

@@ -10,6 +10,10 @@ const routes = [
     component: () => import("@/views/LogIn.vue"),
   },
   {
+    path:"/Register",
+    component: () => import("@/views/Register.vue"),
+  },
+  {
     path: "/:user_id",
     component: () => import("@/components/TabRoot.vue"),
     children: [
@@ -35,7 +39,6 @@ const routes = [
         name: "Settings",
         component: () => import("@/views/Settings.vue")
       }
-    
     ],
   },
 
@@ -43,7 +46,9 @@ const routes = [
     path:"/",
     name:"signIn",
     redirect:"/signIn"
-  }
+  },
+  
+
 ];
 
 const router = new IonicVueRouter({

@@ -93,6 +93,7 @@ export default {
     due_id: Number,
     _currency: String,
     user_id: String,
+    timeout: { type: Number, default: 1000 },
   },
   data() {
     return {
@@ -125,7 +126,22 @@ export default {
 
         //push to the allTransactions
         Transaction.insertTransaction(this.due_id, this.newTxn); //
+        this.loading()
       }
+    },
+    loading() {
+      return this.$ionic.loadingController
+        .create({
+          cssClass: 'my-custom-class',
+          message: 'Adding Transaction...',
+          duration: this.timeout,
+        })
+        .then(loading => {
+          setTimeout(function() {
+            loading.dismiss()
+          }, this.timeout)
+          return loading.present()
+        })
     },
     //when the close button is close, it will dismiss the modal and pass the value of the new bill
     dismissModal() {

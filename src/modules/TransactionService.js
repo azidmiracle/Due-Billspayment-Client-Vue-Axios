@@ -6,7 +6,9 @@ TRANSACTION: ADD TRANSACTION
 
 import axios from "axios";
 
-let txnURL = "https://due-lists.herokuapp.com/dueLists/txn";
+import baseUrl from "@/modules/BaseUrl.js";
+let txnURL = baseUrl.baseUrl+"dueLists/txn";
+
 //new instance of a Due
 class Transaction {
   constructor(date_paid, amount,currency,paid_by, mode_payment) {

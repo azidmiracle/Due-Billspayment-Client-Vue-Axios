@@ -7,8 +7,9 @@ TRANSATIONS SUCH AS ADD BILLS, UPDATE BILLS AND DELETE DUE
 */
 
 import axios from "axios";
-
-let DueURL = "https://due-lists.herokuapp.com/dueLists";
+//import base URL
+import baseUrl from "@/modules/BaseUrl.js";
+let DueURL = baseUrl.baseUrl+"dueLists";
 
 //new instance of a Due
 class Due {
@@ -36,7 +37,7 @@ class Due {
       try {
         axios.get(`${DueURL}/${user_id}`).then((res) => {
           const data = res.data;
-          //console.log(data)
+          //console.log(DueURL)
           resolve(data);
         });
       } catch (err) {

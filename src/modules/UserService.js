@@ -6,17 +6,18 @@ TRANSACTION: VERIFY IF THE USERNAME AND PASSWORD EXISTS IN THE DATABASE
 
 
 import axios from "axios";
+import baseUrl from "@/modules/BaseUrl.js";
 
-let userURL = "https://due-lists.herokuapp.com/user/";
-
+let userURL =  baseUrl.baseUrl+"user/";
+let DueURL =  baseUrl.baseUrl+"dueLists";
 //new instance of a user
 class User {
-  constructor(id, username, password, mobileNumber, country) {
-    this.id = id;
+  constructor(username, password, name) {
     this.username = username;
     this.password = password;
-    this.mobileNumber = mobileNumber;
-    this.country = country;
+    this.name = name;
+    //this.mobileNumber = mobileNumber;
+    //this.country = country;
   }
 
   //It will pass the username and password value to the server side route
@@ -25,7 +26,7 @@ class User {
       try {
         axios.get(`${userURL}${username},${password}`).then((res) => {
           let data = res.data;
-          if (data==null){//if the user does not exist it will return 0
+          if (Object.keys(data).length === 0){//if the user does not exist it will return 0
             data="0"
           }
          //console.log(data)
@@ -36,23 +37,54 @@ class User {
       }
     });
   }
+
+ //It will pass the username and password value to the server side route
+ static checkUser(username) {
+  return new Promise((resolve, reject) => {
+    try {
+      axios.get(`${userURL}${username}`).then((res) => {
+        let data = res.data;
+        if (data==null){//if the user does not exist it will return 0
+          data="0"
+        }
+       //console.log(data)
+        resolve(data);
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
   //create user
-  static insertUser(users) {
+  static insertUser(user) {
     return axios.post(userURL, {
-      username: users["username"],
-      password: users["password"],
-      mobileNumber: users["mobileNumber"],
-      country: users["country"],
+      username: user["username"],
+      password: user["password"],
+      name: user["name"],
+      //mobileNumber: users["mobileNumber"],
+      //country: users["country"],
+    }).then(() =>{
+      //return response.data.message;
+      alert("Registration Successful");
+    }).catch(err =>{
+      alert(err);
     });
   }
 
   //delete user
   static deleteUser(id) {
-    return axios.delete(`${userURL}${id}`);
+    return new Promise((resolve, reject) => {
+      try {
+        axios.delete(`${userURL}${id}`).then(()=>axios.delete(`${DueURL}/${id}`))
+        
+      } catch (err) {
+        reject(err);
+      }
+    });
+
   }
 
-
 }
-
 
 export { User };

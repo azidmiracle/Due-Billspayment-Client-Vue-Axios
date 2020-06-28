@@ -37,10 +37,15 @@
               size="large"
               expand="block"
               @click="logIn"
+          
               class="borderRad-40"
               color="secondary"
               >Login</ion-button
             >
+             <ion-label>
+<p style="margin:10px 10px 10px 10px;padding:5px 10px 5px 10px">Not yet a member? <a href="/Register">Register Here</a></p>
+             </ion-label>
+             
           </div>
         </ion-col>
       </ion-row>
@@ -50,9 +55,12 @@
 
 <script>
 import { User } from "@/modules/UserService.js";
+
 export default {
   name: "LogIn",
-
+   props: {
+    timeout: { type: Number, default: 1000 },
+  },
   data() {
     return {
       username: null,
@@ -71,10 +79,24 @@ export default {
           params: {
             user_id: this.User["_id"],//call the home route. Rooute is saved in src/router/index.js
           },
-        });
+        }).then(()=>this.loading());
       } else {//else, display the alert
         alert("Username does not exist.");
       }
+    },
+      loading() {
+      return this.$ionic.loadingController
+        .create({
+          cssClass: 'my-custom-class',
+          message: 'Logging in...',
+          duration: this.timeout,
+        })
+        .then(loading => {
+          setTimeout(function() {
+            loading.dismiss()
+          }, this.timeout)
+          return loading.present()
+        })
     },
   },
 };

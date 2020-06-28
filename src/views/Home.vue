@@ -41,8 +41,12 @@ import addListModal from "./addListModal.vue";
 import DueList from "@/components/DueList.vue";
 export default {
   name: "Home",
+   props: {
+    timeout: { type: Number, default: 1000 },
+  },
   components: {
     DueList,//child component is DueList.vue
+
   },
   data() {
     return {
@@ -58,6 +62,7 @@ export default {
     this.getAlldues();
     //get the user id from the route params and save it in this user_id variable
     this.user_id = this.$route.params.user_id;
+
   },
   methods: {
     async getAlldues() {
@@ -86,6 +91,7 @@ export default {
       let isDeleted = confirm("All transaction related to this bills name will be deleted. \n Do you want to delete?");
       if (isDeleted) {
         Due.deleteDue(value).then(() => this.getAlldues());
+        this.loadingDelete()
       }
       //console.log(value);
     },
@@ -107,6 +113,20 @@ export default {
       });
       this.billsList = this.billsList_filtered;//pass the value of the billsList_filtered to billsList so it can display the data
       this.billsList_filtered = []; //clear the filtered arrays
+    },
+     loadingDelete() {
+      return this.$ionic.loadingController
+        .create({
+          cssClass: 'my-custom-class',
+          message: 'Deleting Bill...',
+          duration: this.timeout,
+        })
+        .then(loading => {
+          setTimeout(function() {
+            loading.dismiss()
+          }, this.timeout)
+          return loading.present()
+        })
     },
   },
 };

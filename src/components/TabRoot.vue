@@ -41,6 +41,9 @@ import Settings from "@/views/Settings.vue";
 import { TxnHistory } from "@/modules/TxnHistoryService.js";
 export default {
   name: "TabRoot",
+  props: {
+    timeout: { type: Number, default: 500 },
+  },
   components: {
     Home,
     History,
@@ -57,6 +60,21 @@ export default {
   methods: {
     ionTabsWillChange() {//everytime the hsitory tab is clicked it will be reloaded.
       this.getAllTxns();
+      this.loadingUpdate()
+    },
+     loadingUpdate() {
+      return this.$ionic.loadingController
+        .create({
+          cssClass: "my-custom-class",
+          message: "Loading Transaction History...",
+          duration: this.timeout,
+        })
+        .then((loading) => {
+          setTimeout(function() {
+            loading.dismiss();
+          }, this.timeout);
+          return loading.present();
+        });
     },
     async getAllTxns() {
       this.historyLists = await TxnHistory.getAllTransactions(

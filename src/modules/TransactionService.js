@@ -6,8 +6,9 @@ TRANSACTION: ADD TRANSACTION
 
 import axios from "axios";
 
-import baseUrl from "@/modules/BaseUrl.js";
-let txnURL = baseUrl.baseUrl+"dueLists/txn";
+
+let txnURL = process.env.VUE_APP_baseUrl+"dueLists/txn";
+
 
 //new instance of a Due
 class Transaction {

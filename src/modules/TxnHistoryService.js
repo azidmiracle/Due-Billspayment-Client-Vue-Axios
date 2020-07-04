@@ -7,10 +7,7 @@ TRANSACTION: VIEW TRANSACTION HISTORY
 
 import axios from "axios";
 
-
-import baseUrl from "@/modules/BaseUrl.js";
-
-let histURL = baseUrl.baseUrl+"history";
+let histURL = process.env.VUE_APP_baseUrl+"history";
 //new instance of a Due
 class TxnHistory {
 

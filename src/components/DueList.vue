@@ -48,11 +48,24 @@
           </ion-label>
           <ion-button
             slot="end"
-            color="success"
+            color="warning"
             :value="due.bills_name"
             @click="openDueModal(due.bills_name, due)"
           >
             <ion-icon name="arrow-forward"></ion-icon>
+          </ion-button>
+        </ion-item>
+              <ion-item>
+          <ion-label>
+            <b>Add to Calendar</b>
+          </ion-label>
+          <ion-button
+            slot="end"
+            color="secondary"
+            :value="due.scheduled_day"
+            @click="openDueModalCalendar(due.bills_name,due.scheduled_day,due.benefeciary_name)"
+          >
+            <ion-icon name="calendar"></ion-icon>
           </ion-button>
         </ion-item>
       </ion-card-content>
@@ -62,6 +75,7 @@
 <script>
 import { MyDate } from "@/modules/DateController.js";
 import Due from "../views/Due";
+import AddtoGoogleCalender from "../views/AddtoGoogleCalender";
 export default {
   name: "DueList",
   props: {
@@ -114,6 +128,25 @@ export default {
 
       // update the lists
       await modal.onDidDismiss().then(() => this.updateDetails());
+    },
+        //When the see details button is clicked, it will pop up the DUE.VUE view (saved in the view folder)
+    async openDueModalCalendar(bills_name,scheduled_day,benefeciary_name) {
+      let modal = await this.$ionic.modalController.create({
+        component: AddtoGoogleCalender,
+        componentProps: {
+          propsData: {
+            duename: bills_name,
+            scheduled_day: scheduled_day,   
+            benefeciary_name:benefeciary_name        
+          },
+        },
+      });
+
+      // show the modal
+      await modal.present();
+
+      // update the lists
+      //await modal.onDidDismiss().then(() => this.updateDetails());
     },
   },
   computed: {

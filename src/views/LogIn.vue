@@ -42,8 +42,8 @@
               color="secondary"
               >Login</ion-button
             >
-             <ion-label>
-<p style="margin:10px 10px 10px 10px;padding:5px 10px 5px 10px">Not yet a member? <a href="/Register">Register Here</a></p>
+             <ion-label style="display: flex;">              
+                  <p style="margin:auto">Not yet a member? <a href="/Register">Register Here</a></p>
              </ion-label>
              
           </div>

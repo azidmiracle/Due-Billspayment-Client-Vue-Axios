@@ -5,10 +5,7 @@ TRANSACTION: VIEW THE USER USERNAME AND PASSWORD
 */
 
 import axios from "axios";
-
-import baseUrl from "@/modules/BaseUrl.js";
-let userURL =  baseUrl.baseUrl+"settings/";
-
+let userURL =  process.env.VUE_APP_baseUrl+"settings/";
 class User {
 
   static getUserDetails(user_id) {

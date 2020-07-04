@@ -8,8 +8,8 @@ TRANSATIONS SUCH AS ADD BILLS, UPDATE BILLS AND DELETE DUE
 
 import axios from "axios";
 //import base URL
-import baseUrl from "@/modules/BaseUrl.js";
-let DueURL = baseUrl.baseUrl+"dueLists";
+
+let DueURL=process.env.VUE_APP_baseUrl+"dueLists";
 
 //new instance of a Due
 class Due {

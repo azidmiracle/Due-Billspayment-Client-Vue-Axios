@@ -65,8 +65,8 @@
       </form>
     </ion-grid>
     <ion-item text-center lines="none" padding>
-      <ion-label>
-        <p>Already a member? <a href="/signIn">Sign-in</a></p>
+      <ion-label style="display: flex;">
+        <p style="margin:auto">  Already a member? <a href="/signIn">Sign-in</a></p>
       </ion-label>
     </ion-item>
   </ion-content>

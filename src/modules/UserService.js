@@ -4,12 +4,10 @@ THIS MODULE USED FOR THE LOGGING IN CLIENT SIDE USING AXIOS API
 TRANSACTION: VERIFY IF THE USERNAME AND PASSWORD EXISTS IN THE DATABASE
 */
 
-
 import axios from "axios";
-import baseUrl from "@/modules/BaseUrl.js";
 
-let userURL =  baseUrl.baseUrl+"user/";
-let DueURL =  baseUrl.baseUrl+"dueLists";
+let userURL =  process.env.VUE_APP_baseUrl+"user/";
+let DueURL =  process.env.VUE_APP_baseUrl+"dueLists";
 //new instance of a user
 class User {
   constructor(username, password, name) {

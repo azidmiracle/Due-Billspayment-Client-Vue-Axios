@@ -128,6 +128,7 @@ export default {
         Transaction.insertTransaction(this.due_id, this.newTxn); //
         this.loading()
       }
+      
     },
     loading() {
       return this.$ionic.loadingController

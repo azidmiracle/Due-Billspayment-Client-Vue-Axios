@@ -14,6 +14,16 @@ const routes = [
     component: () => import("@/views/Register.vue"),
   },
   {
+    path:"/ForgotPassword",
+
+    component: () => import("@/views/ForgotPassword.vue"),
+  },
+  {
+    path:"/ResetPassword",
+    name: "ResetPassword",
+    component: () => import("@/views/ResetPassword.vue"),
+  },
+  {
     path: "/:user_id",
     component: () => import("@/components/TabRoot.vue"),
     children: [

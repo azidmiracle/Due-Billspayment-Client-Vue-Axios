@@ -11,18 +11,14 @@
     <ion-content padding="true">
       <form @submit="handleAuthClick">
         <ion-item>
-          <ion-label>{{ duename }}</ion-label>
+          <ion-label position="stacked">Title of the Event</ion-label>
+          <ion-input type="text" :value="duename" readonly></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-icon name="calendar"></ion-icon>
-          <ion-datetime
-            display-timezone="utc"
-            :value="recurrenceDate"
-            disabled="true"
-          ></ion-datetime>
+          <ion-label position="stacked">Scheduled day of the month</ion-label>
+          <ion-input type="text" :value="scheduled_day" readonly></ion-input>
         </ion-item>
-
         <ion-list>
           <ion-item>
             <ion-label position="stacked">No. of Years</ion-label>
@@ -44,7 +40,7 @@
           fill="solid"
           expand="block"
           color="danger"
-          >Add</ion-button
+          >Add to Google Calendar</ion-button
         >
       </form>
     </ion-content>
@@ -54,8 +50,8 @@
 <script>
 // Client ID and API key from the Developer Console
 // Array of API discovery doc URLs for APIs used by the quickstart
- const API_KEY=process.env.VUE_APP_API_KEY
-const CLIENT_ID=process.env.VUE_APP_CLIENT_ID
+const API_KEY = process.env.VUE_APP_API_KEY;
+const CLIENT_ID = process.env.VUE_APP_CLIENT_ID;
 const DISCOVERY_DOCS = [
   "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
 ];
@@ -73,8 +69,6 @@ export default {
   },
   data() {
     return {
-       
-     
       noDaysMonth: null,
       years: null,
       recurrenceDate: null,
@@ -187,39 +181,37 @@ export default {
         this.scheduled_day = this.noDaysMonth;
       }
 
-      let scheduleDate = new Date(year, month, this.scheduled_day); //this.scheduled_day
-
+      let scheduleDate = new Date(year, month, this.scheduled_day);
       this.recurrenceDate = scheduleDate.toISOString().slice(0, 10);
 
-      let endDate = new Date(
-      scheduleDate.setMonth(month + (this.years*12))//if the value of the year is 1 it will be multiplied by 12 months
-       ).toISOString().slice(0, 10);
+      //let endDate = new Date(
+      //scheduleDate.setMonth(month + (this.years*12))//if the value of the year is 1 it will be multiplied by 12 months
+      // ).toISOString().slice(0, 10);
 
       //update the event
-      
+
       this.event = {
-        summary:`PAYMENT FOR ${this.duename.toUpperCase()} REMINDER test` ,
-        description:`BENEFECIARY NAME ${this.benefeciary_name}`,
+        summary: `PAYMENT FOR ${this.duename.toUpperCase()} REMINDER`,
+        description: `BENEFECIARY NAME ${this.benefeciary_name}`,
         start: {
-          dateTime: `${this.recurrenceDate}T09:00:00-07:00`,
+          dateTime: `${this.recurrenceDate}T18:00:00.000-07:00`,
           timeZone: "Singapore",
-        }
-    ,
+        },
         end: {
-          dateTime: `${endDate}T09:00:00-07:00`,
+          dateTime: `${this.recurrenceDate}T18:25:00.000-07:00`,
           timeZone: "Singapore",
-        }
-        ,
-       recurrence: ["RRULE:FREQ=YEARLY;BYMONTH=1;BYMONTHDAY=1;COUNT=12"],
+        },
+        recurrence: [`RRULE:FREQ=MONTHLY;INTERVAL=1;COUNT=${this.years*12}`],
+
         reminders: {
           useDefault: false,
           overrides: [
             { method: "email", minutes: 24 * 60 },
             { method: "popup", minutes: 10 },
           ],
-        }
+        },
       };
-      
+      //console.log(this.event);
     },
   },
 };

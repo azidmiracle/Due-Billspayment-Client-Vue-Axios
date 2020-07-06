@@ -66,21 +66,24 @@ export default {
   },
   data() {
     return {
-      selectedIndex: 0,//default to the first tab when initially loaded
+      selectedIndex: 0, //default to the first tab when initially loaded
+      filteredMonth: 3,
     };
   },
   methods: {
     getMonthID(index) {
-      this.selectedIndex = index;//when the tab is clicked, it will get the index value
+      this.selectedIndex = index; //when the tab is clicked, it will get the index value
     },
-    selectedMonthClass(index) {//color attribute of the button is binded in this selectedClass class name. It will dynamically change the color of the button
+    selectedMonthClass(index) {
+      //color attribute of the button is binded in this selectedClass class name. It will dynamically change the color of the button
       let selectedClass = "";
-      if (this.selectedIndex === index) {//if it is the selected button, it will change the color to secondary
+      if (this.selectedIndex === index) {
+        //if it is the selected button, it will change the color to secondary
         selectedClass = "success";
 
         //console.log(index)
       } else {
-        selectedClass = "light";//others not selected will set the color to light
+        selectedClass = "light"; //others not selected will set the color to light
       }
 
       return selectedClass;
@@ -97,6 +100,6 @@ export default {
         return MyDate.formatDate(newDate);
       };
     },
-  }
+  },
 };
 </script>

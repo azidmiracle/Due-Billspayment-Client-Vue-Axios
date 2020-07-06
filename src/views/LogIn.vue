@@ -3,14 +3,17 @@
     <ion-grid>
       <ion-row>
         <img
-          src="https://diazloria.com/Diaz-loria.jpg"
+          src="https://diazloria.com/duelists/LOGO.jpg"
           style="border-radius: 50%;"
         />
       </ion-row>
       <ion-row center>
         <ion-col text-center size-md="5" size-lg="5" size-xs="12">
           <div class="ion-padding">
-            <ion-label><b> Mark and Emely Loria Bills Payment</b></ion-label>
+            <div style="display: flex;">
+                <p><b> Please sign-in </b></p>
+            </div>
+            
             <ion-item>
               <ion-input
                 type="text"
@@ -45,6 +48,9 @@
              <ion-label style="display: flex;">              
                   <p style="margin:auto">Not yet a member? <a href="/Register">Register Here</a></p>
              </ion-label>
+              <ion-label style="display: flex;">              
+                  <p style="margin:auto">Forgot your <a href="/ForgotPassword">password?</a></p>
+             </ion-label>
              
           </div>
         </ion-col>
@@ -72,6 +78,7 @@ export default {
     async logIn() {
       //check if the username and password exists in users database
       this.User = await User.getUser(this.username, this.password);
+      //console.log(this.User)
       //If username and password matches the value in the user collection, redirect to log-in page
       if (this.User != 0) {
         this.$router.push({

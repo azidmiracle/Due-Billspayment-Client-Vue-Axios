@@ -6,13 +6,13 @@ function loadGAPIScript(gapiUrl) {
         var interval = setInterval(function () {
           if (!script.readyState || /loaded|complete/.test(script.readyState)) {
             clearInterval(interval)
-            console.log('gapi.js loaded.')
+            //console.log('gapi.js loaded.')
             resolve()
           }
         }, 100)
       }
       script.onerror = function (message, url, line, column, error) {
-        console.log('gapi.js not loaded.')
+        //console.log('gapi.js not loaded.')
         reject({ message, url, line, column, error })
       }
       document.getElementsByTagName('head')[0].appendChild(script)

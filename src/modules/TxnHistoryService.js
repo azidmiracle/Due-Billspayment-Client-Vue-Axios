@@ -13,10 +13,10 @@ class TxnHistory {
 
 
 //get all transaction
-static getAllTransactions(username) {
+static getAllTransactions(username,noMonth) {
   return new Promise((resolve, reject) => {
     try {
-      axios.get(`${histURL}/${username}`).then((res) => {
+      axios.get(`${histURL}/${username}/${noMonth}`).then((res) => {
         const data = res.data;
         //console.log(data)
         resolve(data);

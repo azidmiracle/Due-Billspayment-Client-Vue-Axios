@@ -5,43 +5,9 @@
         <ion-row center>
           <ion-col text-center size-md="5" size-lg="5" size-xs="12">
             <div class="ion-padding">
-              <ion-label><b>Registration</b></ion-label>
-
+              <ion-label><b>Password Reset</b></ion-label>           
               <ion-item>
-                <ion-label position="stacked">Username</ion-label>
-                <ion-input
-                  type="text"
-                  :value="username"
-                  @input="username = $event.target.value"
-                  placeholder="my_username"
-                  clear-input="true"
-                  required
-                ></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">Name</ion-label>
-                <ion-input
-                  type="text"
-                  :value="name"
-                  @input="name = $event.target.value"
-                  placeholder="Juan Dela Cruz"
-                  clear-input="true"
-                  required
-                ></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">E-mail</ion-label>
-                <ion-input
-                  type="email"
-                  :value="email"
-                  @input="email = $event.target.value"
-                  placeholder="example@gmail.com"
-                  clear-input="true"
-                  required
-                ></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">Password</ion-label>
+                <ion-label position="stacked">New Password</ion-label>
                 <ion-input
                   type="password"
                   :value="password"
@@ -53,7 +19,7 @@
               </ion-item>
 
               <ion-item>
-                <ion-label position="stacked">Confirm Password</ion-label>
+                <ion-label position="stacked">Confirm New Password</ion-label>
                 <ion-input
                   type="password"
                   :value="password_2"
@@ -72,7 +38,7 @@
                 expand="block"
                 class="borderRad-40"
                 color="secondary"
-                >Register</ion-button
+                >Reset</ion-button
               >
             </div>
           </ion-col>
@@ -90,38 +56,32 @@
 </template>
 
 <script>
-import { User } from "@/modules/UserService.js";
+import { User } from "@/modules/ForgotPasswordService.js";
 
 export default {
-  name: "Register",
+  name: "ResetPassword",
   props: {
     timeout: { type: Number, default: 1000 },
   },
   data() {
     return {
-      username: null,
-      name: null,
       email:null,
       password: null,
       password_2: null,
-      User: {},
     };
+  },
+  created(){
+      this.email=this.$route.params.email;
   },
   methods: {
     async register(e) {
-      e.preventDefault(); //to prevent the page from reloading
-      //check if the username and password exists in users database
-      this.User = await User.checkUser(this.username);
-      //If username and password matches the value in the user collection, user already exist
-      if (this.User != 0) {
-        alert("Username already used.");
-      } else {
+      e.preventDefault(); //to prevent the page from reloading 
         //check if both password mathces
         if (this.password == this.password_2) {
           //create new instance of user
-          this.User = new User(this.username,this.email, this.password, this.name);
           //insert the new instance by calling this method insertUser from UserService.js
-          User.insertUser(this.User).then(() =>
+          User.updateUserPwd(this.email,this.password).then(() =>
+            
             this.$router.push({
               name: "signIn", //redirect to sign in page
             })
@@ -129,8 +89,7 @@ export default {
           this.loading();
         } else {
           alert("Password does not match.");
-        }
-      }
+        }    
     },
     loading() {
       return this.$ionic.loadingController

@@ -3,7 +3,7 @@
     <ion-tabs>
       <!-- Get matched routes with a helper method -->
       <ion-tab tab="History" :routes="['History']" :to="{ name: 'History' }">
-        <History :historyLists="historyLists" :histLength="histLength" />
+        <History />
       </ion-tab>
       <ion-tab tab="home" :routes="['home', 'due-name']" :to="{ name: 'home' }">
         <Home />
@@ -15,7 +15,7 @@
       <template slot="bottom">
         <ion-tab-bar>
           <!-- Provide custom click handler -->
-          <ion-tab-button tab="History" @click="ionTabsWillChange">
+          <ion-tab-button tab="History" >
             <ion-icon name="stats"></ion-icon>
             <ion-label>History</ion-label>
           </ion-tab-button>
@@ -38,50 +38,17 @@
 import History from "@/views/History.vue";
 import Home from "@/views/Home.vue";
 import Settings from "@/views/Settings.vue";
-import { TxnHistory } from "@/modules/TxnHistoryService.js";
+
 export default {
   name: "TabRoot",
   props: {
-    timeout: { type: Number, default: 500 },
+    
   },
   components: {
     Home,
     History,
     Settings,
   },
-  data() {
-    return {
-      historyLists: [],
-    };
-  },
-  created() {
-    this.getAllTxns();
-  },
-  methods: {
-    ionTabsWillChange() {//everytime the hsitory tab is clicked it will be reloaded.
-      this.getAllTxns();
-      this.loadingUpdate()
-    },
-     loadingUpdate() {
-      return this.$ionic.loadingController
-        .create({
-          cssClass: "my-custom-class",
-          message: "Loading Transaction History...",
-          duration: this.timeout,
-        })
-        .then((loading) => {
-          setTimeout(function() {
-            loading.dismiss();
-          }, this.timeout);
-          return loading.present();
-        });
-    },
-    async getAllTxns() {
-      this.historyLists = await TxnHistory.getAllTransactions(
-        this.$route.params.user_id
-      );
-      
-    },
-  },
+
 };
 </script>

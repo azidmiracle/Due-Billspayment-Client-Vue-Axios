@@ -10,8 +10,9 @@ let userURL =  process.env.VUE_APP_baseUrl+"user/";
 let DueURL =  process.env.VUE_APP_baseUrl+"dueLists";
 //new instance of a user
 class User {
-  constructor(username, password, name) {
+  constructor(username, email,password, name) {
     this.username = username;
+    this.email = email;
     this.password = password;
     this.name = name;
     //this.mobileNumber = mobileNumber;
@@ -58,6 +59,7 @@ class User {
   static insertUser(user) {
     return axios.post(userURL, {
       username: user["username"],
+      email: user["email"],
       password: user["password"],
       name: user["name"],
       //mobileNumber: users["mobileNumber"],
@@ -82,6 +84,8 @@ class User {
     });
 
   }
+
+
 
 }
 

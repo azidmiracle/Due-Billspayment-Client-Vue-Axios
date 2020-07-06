@@ -23,6 +23,7 @@ import {
   settings,
   eye,
   eyeOff,
+  refresh
 } from "ionicons/icons";
 import { addIcons } from "ionicons";
 addIcons({
@@ -56,6 +57,8 @@ addIcons({
   "ios-eye": eye.ios,
   "md-eye-off": eyeOff.md,
   "ios-eye-off": eyeOff.ios,
+  "md-refresh": refresh.md,
+  "ios-refresh": refresh.ios,
 });
 
 
